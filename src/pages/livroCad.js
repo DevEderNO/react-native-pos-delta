@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {View, Text, StyleSheet, KeyboardAvoidingView, Alert, Picker} from 'react-native'
-import { Platform } from '@unimodules/core'
-import { TextInput, TouchableOpacity} from 'react-native-gesture-handler'
 import api from '../services/api';
 import DatePicker from 'react-native-datepicker'
+import TextInputLabelCustumizado from '../components/TextInputLabelCustumizado'
+import TouchableOpacityCustomizado from '../components/TouchableOpacityCustomizado'
 
 export default function LivroCad() {
     const [nome, setNome] = useState('');
@@ -48,38 +48,35 @@ export default function LivroCad() {
     }
     return(
         <KeyboardAvoidingView 
-            enabled={Platform.OS == 'ios'} 
+            enabled 
             behavior="padding"
             style={styles.container} >
             <Text style={styles.titulo}>Cadastro de Livro</Text>
             <View style={styles.form}>
-                <Text style={styles.label}>Nome: *</Text>
-                <TextInput style={styles.input}
+                <TextInputLabelCustumizado
+                    label="Nome: *"
                     placeholder="Nome do Livro"
-                    placeholderTextColor="#999"
                     value={nome}
-                    onChangeText={setNome} />
-                <Text style={styles.label}>Valor: *</Text>
-                <TextInput style={styles.input}
+                    onChangeText={setNome}/>
+                <TextInputLabelCustumizado
+                    label="Valor: *"
                     placeholder="Valor do Livro"
-                    placeholderTextColor="#999"
                     keyboardType={'numeric'}
-                    value={valor}
-                    onChangeText={setValor} />
-                <Text style={styles.label}>Volume: *</Text>
-                <TextInput style={styles.input}
+                    value={nome}
+                    onChangeText={setNome}/>
+                <TextInputLabelCustumizado
+                    label="Volume: *"
                     placeholder="Volume do Livro"
-                    placeholderTextColor="#999"
                     keyboardType={'numeric'}
                     value={volume}
-                    onChangeText={setVolume} />
+                    onChangeText={setVolume}/>
                 <Text style={styles.label}>Dt Publicacão: *</Text>
                 <DatePicker
                     style={styles.data}
                     date={dataPublicacao}
                     mode="date"
                     placeholder="select date"
-                    format="YYYY-MM-DD"
+                    format="DD/MM/YYYY"
                     minDate="2016-05-01"
                     maxDate="2100-06-01"
                     confirmBtnText="Confirm"
@@ -105,9 +102,9 @@ export default function LivroCad() {
                         })
                     }
                 </Picker> 
-                    <TouchableOpacity style={styles.botao} onPress={handleSubmit}>
-                        <Text style={styles.botaoTexto}>Salvar</Text>
-                    </TouchableOpacity>
+                <TouchableOpacityCustomizado
+                    label="Salvar"
+                    onPress={handleSubmit}/>
             </View>
         </KeyboardAvoidingView>
     );

@@ -9,7 +9,8 @@ export default function TextInputLabelCustumizado(props){
       <Text style={styles.label}>{props.label}</Text>
       <TextInput style={styles.input}
           placeholder={props.placeholder}
-          placeholderTextColor={props.placeholderTextColor}
+          placeholderTextColor="#999"
+          keyboardType={props.keyboardType}
           value={props.value}
           onChangeText={props.onChangeText} />
     </View>

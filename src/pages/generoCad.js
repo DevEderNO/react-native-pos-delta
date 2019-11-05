@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import {View, Text, StyleSheet, KeyboardAvoidingView, Alert} from 'react-native'
-import { Platform } from '@unimodules/core'
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import api from '../services/api';
 import TextInputLabelCustumizado from '../components/TextInputLabelCustumizado';
+import TouchableOpacityCustomizado from '../components/TouchableOpacityCustomizado'
 
 export default function GeneroCad() {
     const [descricao, setDescricao] = useState('');
@@ -23,20 +22,19 @@ export default function GeneroCad() {
     }
     return(
         <KeyboardAvoidingView 
-            enabled={Platform.OS == 'ios'} 
+            enabled 
             behavior="padding"
             style={styles.container} >
+            <Text style={styles.titulo}>Cadastro de Genero</Text>
             <View style={styles.form}>
-                <Text style={styles.titulo}>Cadastro de Genero</Text>
                 <TextInputLabelCustumizado
                     label="Genero: *"
                     placeholder="Informe o genero"
-                    placeholderTextColor="#999"
                     value={descricao}
                     onChangeText={setDescricao}/>
-                    <TouchableOpacity style={styles.botao} onPress={handleSubmit}>
-                        <Text style={styles.botaoTexto}>Salvar</Text>
-                    </TouchableOpacity>
+                <TouchableOpacityCustomizado
+                    label="Salvar"
+                    onPress={handleSubmit}/>
             </View>
         </KeyboardAvoidingView>
     );
@@ -48,7 +46,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }, 
     titulo : {
-        fontSize: 20
+        fontSize: 20,
+        paddingBottom: 5
     },
     form: {
         alignSelf: 'stretch',
