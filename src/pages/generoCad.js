@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, KeyboardAvoidingView, Alert} from 'react-native'
 import { Platform } from '@unimodules/core'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import api from '../services/api';
+import TextInputLabelCustumizado from '../components/TextInputLabelCustumizado';
 
 export default function GeneroCad() {
     const [descricao, setDescricao] = useState('');
@@ -27,12 +28,12 @@ export default function GeneroCad() {
             style={styles.container} >
             <View style={styles.form}>
                 <Text style={styles.titulo}>Cadastro de Genero</Text>
-                <Text style={styles.label}>Descrição: *</Text>
-                <TextInput style={styles.input}
-                    placeholder="Descrição do genero"
+                <TextInputLabelCustumizado
+                    label="Genero: *"
+                    placeholder="Informe o genero"
                     placeholderTextColor="#999"
                     value={descricao}
-                    onChangeText={setDescricao} />
+                    onChangeText={setDescricao}/>
                     <TouchableOpacity style={styles.botao} onPress={handleSubmit}>
                         <Text style={styles.botaoTexto}>Salvar</Text>
                     </TouchableOpacity>
@@ -53,20 +54,6 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         paddingHorizontal: 30,
         marginTop: 30
-    },
-    label: {
-        fontWeight: 'bold',
-        color: '#444',
-        marginBottom: 8
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#ddd',
-        paddingHorizontal: 20,
-        fontSize: 16,
-        color: '#444',
-        marginBottom: 20,
-        borderRadius: 2
     },
     botao: {
         height: 42,

@@ -4,6 +4,7 @@ import generoCad from './pages/generoCad';
 import GeneroList from './pages/generoList';
 import LivroCad from './pages/livroCad';
 import LivroList from './pages/livroList';
+import EnderecoCad from './pages/enderecoCad';
 
 const Routes = createAppContainer(
     createDrawerNavigator({
@@ -31,7 +32,12 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Lista de Livro'
             }
-            
+        },
+        CadastroEndereco: {
+            screen: EnderecoCad,
+            navigationOptions:{
+                drawerLabel: 'Cadastro de Endereço'
+            }
         }
     })
 );

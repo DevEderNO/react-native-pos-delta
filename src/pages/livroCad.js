@@ -11,11 +11,15 @@ export default function LivroCad() {
     const [generos, setGenero] = useState([]);
     const [idGenero, setIdGenero] = useState('');
     const [volume, setVolume] = useState('');
-    const [dataPublicacao, setDataPublicacao] = useState(Date());
+    const [dataPublicacao, setDataPublicacao] = useState(new Date());
 
     async function carregarGeneros(){
-        const response = await api.get('/generos');
-        setGenero(response.data);
+        try {
+            const response = await api.get('/generos');
+            setGenero(response.data);
+        } catch (error) {
+            Alert.alert('Erro ao carregar a lista de generos');
+        }
     }
 
     carregarGeneros();
