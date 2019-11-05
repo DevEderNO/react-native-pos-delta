@@ -1,10 +1,20 @@
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, DrawerItems} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import generoCad from './pages/generoCad';
 import GeneroList from './pages/generoList';
 import LivroCad from './pages/livroCad';
 import LivroList from './pages/livroList';
 import EnderecoCad from './pages/enderecoCad';
+
+import Ionicons from 'react-native-vector-icons'
+
+import { Text, Image } from 'react-native';
+import { Container,Content,Header,Left,Body,Icon } from 'native-base'
+
+const MyNavigator = createDrawerNavigator({
+    Home: HomeComponent,
+    Profile: ProfileComponent
+})
 
 const Routes = createAppContainer(
     createDrawerNavigator({
