@@ -15,3 +15,4 @@ metro-cache/*
 # macOS
 .DS_Store
 haste-map-metro*
+yarn.lock
