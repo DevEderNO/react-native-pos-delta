@@ -73,8 +73,7 @@ export default function LivroCad() {
                 <DatePickerCustom
                     label="Data de publicação: *"
                     date={dataPublicacao}
-                    onDateChange={setDataPublicacao}
-                />
+                    onDateChange={setDataPublicacao}/>
                 <Text style={styles.label}>Genero: *</Text>
                 <Picker selectedValue={idGenero}
                     onValueChange={setIdGenero}>
