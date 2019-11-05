@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {View, Text, StyleSheet, KeyboardAvoidingView, Alert} from 'react-native'
 import api from '../services/api';
-import TextInputLabelCustumizado from '../components/TextInputLabelCustumizado';
-import TouchableOpacityCustomizado from '../components/TouchableOpacityCustomizado'
+import TextInputLabelCustom from '../components/TextInputLabelCustom';
+import TouchableOpacityCustom from '../components/TouchableOpacityCustom'
 
 export default function GeneroCad() {
     const [descricao, setDescricao] = useState('');
@@ -27,12 +27,12 @@ export default function GeneroCad() {
             style={styles.container} >
             <Text style={styles.titulo}>Cadastro de Genero</Text>
             <View style={styles.form}>
-                <TextInputLabelCustumizado
+                <TextInputLabelCustom
                     label="Genero: *"
                     placeholder="Informe o genero"
                     value={descricao}
                     onChangeText={setDescricao}/>
-                <TouchableOpacityCustomizado
+                <TouchableOpacityCustom
                     label="Salvar"
                     onPress={handleSubmit}/>
             </View>
@@ -53,17 +53,5 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         paddingHorizontal: 30,
         marginTop: 30
-    },
-    botao: {
-        height: 42,
-        backgroundColor: '#f05a5b',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 2
-    },
-    botaoTexto: {
-        color: '#FFF',
-        fontWeight: 'bold',
-        fontSize: 16
     }
 });

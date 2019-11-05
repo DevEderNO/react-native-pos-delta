@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Alert,ScrollView } from 'react-native';
 import api from '../services/api';
-import TextInputLabelCustumizado from '../components/TextInputLabelCustumizado';
-import TouchableOpacityCustomizado from '../components/TouchableOpacityCustomizado';
+import TextInputLabelCustom from '../components/TextInputLabelCustom';
+import TouchableOpacityCustom from '../components/TouchableOpacityCustom';
 
 export default function EnderecoCad() {
   const [bairro, setBairro] = useState('');
@@ -54,52 +54,52 @@ export default function EnderecoCad() {
         style={styles.container}>
         <Text style={styles.titulo}>Cadastro de Endereço</Text>
         <View style={styles.form}>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Rua: *"
             placeholder="Informe a rua"
             value={rua}
             onChangeText={setRua}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Lote: *"
             placeholder="Informe a lote"
             value={lote}
             onChangeText={setLote}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Quadra: *"
             placeholder="Informe a quadra"
             value={quadra}
             onChangeText={setQuadra}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Numero: *"
             placeholder="Informe a numero"
             value={numero}
             onChangeText={setNumero}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Bairro: *"
             placeholder="Informe a bairro"
             value={bairro}
             onChangeText={setBairro}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Complemento: *"
             placeholder="Informe a complemento"
             value={complemento}
             onChangeText={setComplemento}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Cidade: *"
             placeholder="Informe a cidade"
             value={cidade}
             onChangeText={setCidade}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Estado: *"
             placeholder="Informe a estado"
             value={estado}
             onChangeText={setEstado}/>
-          <TextInputLabelCustumizado
+          <TextInputLabelCustom
             label="Pais: *"
             placeholder="Informe a pais"
             value={pais}
             onChangeText={setPais}/>
-          <TouchableOpacityCustomizado 
+          <TouchableOpacityCustom 
             label="Salvar"
             onPress={handleSubmit}/>
         </View>
@@ -125,17 +125,5 @@ const styles = StyleSheet.create({
       alignSelf: 'stretch',
       paddingHorizontal: 30,
       marginTop: 30
-  },
-  botao: {
-      height: 42,
-      backgroundColor: '#f05a5b',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 2
-  },
-  botaoTexto: {
-      color: '#FFF',
-      fontWeight: 'bold',
-      fontSize: 16
   }
 });

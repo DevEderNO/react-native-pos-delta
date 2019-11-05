@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {View, Text, StyleSheet, KeyboardAvoidingView, Alert, Picker} from 'react-native'
 import api from '../services/api';
-import DatePicker from 'react-native-datepicker'
-import TextInputLabelCustumizado from '../components/TextInputLabelCustumizado'
-import TouchableOpacityCustomizado from '../components/TouchableOpacityCustomizado'
+import TextInputLabelCustom from '../components/TextInputLabelCustom'
+import TouchableOpacityCustom from '../components/TouchableOpacityCustom'
+import DatePickerCustom from '../components/DatePickerCustom'
 
 export default function LivroCad() {
     const [nome, setNome] = useState('');
@@ -53,42 +53,26 @@ export default function LivroCad() {
             style={styles.container} >
             <Text style={styles.titulo}>Cadastro de Livro</Text>
             <View style={styles.form}>
-                <TextInputLabelCustumizado
+                <TextInputLabelCustom
                     label="Nome: *"
                     placeholder="Nome do Livro"
                     value={nome}
                     onChangeText={setNome}/>
-                <TextInputLabelCustumizado
+                <TextInputLabelCustom
                     label="Valor: *"
                     placeholder="Valor do Livro"
                     keyboardType={'numeric'}
                     value={nome}
                     onChangeText={setNome}/>
-                <TextInputLabelCustumizado
+                <TextInputLabelCustom
                     label="Volume: *"
                     placeholder="Volume do Livro"
                     keyboardType={'numeric'}
                     value={volume}
                     onChangeText={setVolume}/>
-                <Text style={styles.label}>Dt Publicacão: *</Text>
-                <DatePicker
-                    style={styles.data}
+                <DatePickerCustom
+                    label="Data de publicação: *"
                     date={dataPublicacao}
-                    mode="date"
-                    placeholder="select date"
-                    format="DD/MM/YYYY"
-                    minDate="2016-05-01"
-                    maxDate="2100-06-01"
-                    confirmBtnText="Confirm"
-                    cancelBtnText="Cancel"
-                    customStyles={{
-                        dateIcon: {
-                            position: 'absolute',
-                            left: 0,
-                            top: 4,
-                            marginLeft: 0
-                        }// ... You can check the source to find the other keys.
-                    }}
                     onDateChange={setDataPublicacao}
                 />
                 <Text style={styles.label}>Genero: *</Text>
@@ -102,7 +86,7 @@ export default function LivroCad() {
                         })
                     }
                 </Picker> 
-                <TouchableOpacityCustomizado
+                <TouchableOpacityCustom
                     label="Salvar"
                     onPress={handleSubmit}/>
             </View>
@@ -123,34 +107,5 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         paddingHorizontal: 30,
         marginTop: 30
-    },
-    label: {
-        fontWeight: 'bold',
-        color: '#444',
-        marginBottom: 8
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#ddd',
-        paddingHorizontal: 20,
-        fontSize: 16,
-        color: '#444',
-        marginBottom: 20,
-        borderRadius: 2
-    },
-    botao: {
-        height: 42,
-        backgroundColor: '#f05a5b',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 2
-    },
-    botaoTexto: {
-        color: '#FFF',
-        fontWeight: 'bold',
-        fontSize: 16
-    },
-    data: {
-        width: '100%'
     }
 });

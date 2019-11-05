@@ -3,7 +3,7 @@ import { View, Text,StyleSheet } from 'react-native';
 import { TextInput} from 'react-native-gesture-handler';
 
 
-export default function TextInputLabelCustumizado(props){
+export default function TextInputLabelCustom(props){
   return(
     <View>
       <Text style={styles.label}>{props.label}</Text>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   label: {
       fontWeight: 'bold',
       color: '#444',
-      marginBottom: 8
+      marginBottom: 5
   },
   input: {
       borderWidth: 1,

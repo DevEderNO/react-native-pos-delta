@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 import api from '../services/api';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
+import TouchableOpacityCustom from '../components/TouchableOpacityCustom'
 
 export default function LivroList() {
     const [livros, setLivros] = useState([]);
@@ -25,12 +26,10 @@ export default function LivroList() {
                      <Text style={styles.label}>Volume: {item.volume}</Text>
                      <Text style={styles.label}>Genero: {item.genero.descricao}</Text>
                      <Text style={styles.label}>Dt. Publicação: {item.dataPublicacao}</Text>
-                     <TouchableOpacity onPress = {async ()=>{
-                         const id = item.id;
-                         await api.delete(`/livros/${id}`);
-                     }}>
-                         <Text style={styles.botaoTexto}>Excluir</Text>
-                     </TouchableOpacity>
+                     <TouchableOpacityCustom 
+                        onPress = {async ()=>{ const id = item.id; await api.delete(`/livros/${id}`)}}
+                        label="Excluir"
+                     />
                    </View>
                  </View>
              ) }
@@ -65,9 +64,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         borderRadius: 5,
         padding: 10
-    },
-    botaoTexto: {
-        fontWeight: 'bold',
-        color: '#f44336'
     }
 });

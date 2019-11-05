@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, StyleSheet } from 'react-native';
 
 
-export default function TouchableOpacityCustomizado(props){
+export default function TouchableOpacityCustom(props){
     return(
         <TouchableOpacity style={styles.botao} onPress={props.onPress}>
             <Text style={styles.botaoTexto}>{props.label}</Text>
