@@ -1,15 +1,16 @@
 import {createAppContainer, DrawerItems} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
-import generoCad from './pages/generoCad';
+import FormGenero from './pages/FormGenero';
+import FormAutor from './pages/FormAutor';
 import GeneroList from './pages/generoList';
-import LivroCad from './pages/livroCad';
+import FormLivro from './pages/FormLivro';
 import LivroList from './pages/livroList';
-import EnderecoCad from './pages/enderecoCad';
+import FormEndereco from './pages/FormEndereco';
 
 const Routes = createAppContainer(
     createDrawerNavigator({
-        CadastroGenero: {
-            screen: generoCad,
+        FormGenero: {
+            screen: FormGenero,
             navigationOptions:{
                 drawerLabel: 'Cadastro de Genero'
             }
@@ -21,8 +22,8 @@ const Routes = createAppContainer(
             }
             
         },
-        CadastroLivro: {
-            screen: LivroCad,
+        FormLivro: {
+            screen: FormLivro,
             navigationOptions:{
                 drawerLabel: 'Cadastro de Livro'
             }
@@ -34,9 +35,15 @@ const Routes = createAppContainer(
             }
         },
         CadastroEndereco: {
-            screen: EnderecoCad,
+            screen: FormEndereco,
             navigationOptions:{
                 drawerLabel: 'Cadastro de Endereço'
+            }
+        },
+        FormAutor: {
+            screen: FormAutor,
+            navigationOptions:{
+                drawerLabel: 'Cadastro de Autor'
             }
         }
     })

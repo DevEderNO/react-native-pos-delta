@@ -8,7 +8,7 @@ import {
 import api from '../services/api';
 import { StyleSheet, Alert } from 'react-native'
 
-export default function GeneroCad(props) {
+export default function FormGenero(props) {
     this.state = {
         showToast:false
     }

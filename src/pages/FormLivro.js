@@ -1,12 +1,16 @@
 import React, {useState} from 'react'
-import {View, Text, StyleSheet, KeyboardAvoidingView, Alert, Picker} from 'react-native'
+import {StyleSheet, Alert} from 'react-native'
+import {
+    Container, Header, Title, Content,
+    Footer, FooterTab, Button, Left,
+    Body, Icon, Text, Item, Label,
+    Input
+} from 'native-base';
 import api from '../services/api';
-import TextInputLabelCustom from '../components/TextInputLabelCustom'
-import TouchableOpacityCustom from '../components/TouchableOpacityCustom'
-import DatePickerCustom from '../components/DatePickerCustom'
 import moment from 'moment';
+import DatePickerCustom from '../components/DatePickerCustom'
 
-export default function LivroCad() {
+export default function FormLivro() {
     const [nome, setNome] = useState('');
     const [valor, setValor] = useState('');
     const [generos, setGenero] = useState([]);
@@ -48,7 +52,62 @@ export default function LivroCad() {
         }
     }
     return(
-        <KeyboardAvoidingView 
+        <Container>
+            <Header>
+                <Left>
+                    <Button transparent>
+                        <Icon name='menu' />
+                    </Button>
+                </Left>
+                <Body>
+                    <Title>Cadastro de Livro</Title>
+                </Body>
+            </Header>
+            <Content>
+                <Container style={styles.container}>
+                    <Item floatingLabel style={styles.item}>
+                        <Label>Nome do livro</Label>
+                        <Input value={nome} onChangeText={setNome} />
+                    </Item>
+                    <Item floatingLabel style={styles.item}>
+                        <Label>Valor do livro</Label>
+                        <Input value={valor} onChangeText={setValor} keyboardType={'numeric'} />
+                    </Item>
+                    <Item floatingLabel style={styles.item}>
+                        <Label>Volume do livro</Label>
+                        <Input value={volume} onChangeText={setVolume} keyboardType={'numeric'} />
+                    </Item>
+                    <Item floatingLabel style={styles.item}></Item>
+                        <DatePickerCustom
+                            label='Data de publicação'
+                            date={dataPublicacao} 
+                            onDateChange={setDataPublicacao}
+                        />
+
+                    <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
+                </Container>
+            </Content>
+            <Footer>
+                <FooterTab>
+                    <Button full>
+                        <Text>Footer</Text>
+                    </Button>
+                </FooterTab>
+            </Footer>
+        </Container>
+    );
+}
+const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    }, 
+    item:{
+        marginVertical: 5
+    }
+});
+
+{/* <KeyboardAvoidingView 
             enabled 
             behavior="padding"
             style={styles.container} >
@@ -90,22 +149,4 @@ export default function LivroCad() {
                     label="Salvar"
                     onPress={handleSubmit}/>
             </View>
-        </KeyboardAvoidingView>
-    );
-}
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }, 
-    titulo : {
-        fontSize: 20,
-        paddingBottom: 5
-    },
-    form: {
-        alignSelf: 'stretch',
-        paddingHorizontal: 30,
-        marginTop: 30
-    }
-});
+        </KeyboardAvoidingView> */}
