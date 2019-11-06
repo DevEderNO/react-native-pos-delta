@@ -12,8 +12,8 @@ export default function DatePickerCustom(props) {
                 mode="date"
                 placeholder="selecione uma data"
                 format="DD/MM/YYYY"
-                minDate="1500-01-01"
-                maxDate="2100-06-01"
+                minDate="01/01/1500"
+                maxDate="01/01/2100"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 customStyles={{

@@ -11,8 +11,9 @@ web-build/
 web-report/
 metro-cache/*
 *.log
+yarn.lock
+package-lock.json
 
 # macOS
 .DS_Store
 haste-map-metro*
-yarn.lock

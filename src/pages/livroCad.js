@@ -4,6 +4,7 @@ import api from '../services/api';
 import TextInputLabelCustom from '../components/TextInputLabelCustom'
 import TouchableOpacityCustom from '../components/TouchableOpacityCustom'
 import DatePickerCustom from '../components/DatePickerCustom'
+import moment from 'moment';
 
 export default function LivroCad() {
     const [nome, setNome] = useState('');
@@ -30,10 +31,10 @@ export default function LivroCad() {
             {
                 nome,
                 valor,
-                genero:{idGenero},
+                genero:{id:idGenero},
                 volume,
-                dataPublicacao
-            });
+                dataPublicacao:moment(dataPublicacao, 'DD/MM/YYYY').format('YYYY-MM-DD')
+            })
     
             Alert.alert('Livro salvo com sucesso!');
             setNome('');
@@ -62,8 +63,8 @@ export default function LivroCad() {
                     label="Valor: *"
                     placeholder="Valor do Livro"
                     keyboardType={'numeric'}
-                    value={nome}
-                    onChangeText={setNome}/>
+                    value={valor}
+                    onChangeText={setValor}/>
                 <TextInputLabelCustom
                     label="Volume: *"
                     placeholder="Volume do Livro"

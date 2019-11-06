@@ -1,57 +1,65 @@
-import React, {useState} from 'react'
-import {View, Text, StyleSheet, KeyboardAvoidingView, Alert} from 'react-native'
+import React, { useState } from 'react'
+import {
+    Container, Header, Title, Content,
+    Footer, FooterTab, Button, Left,
+    Body, Icon, Text, Item, Label,
+    Input
+} from 'native-base';
 import api from '../services/api';
-import TextInputLabelCustom from '../components/TextInputLabelCustom';
-import TouchableOpacityCustom from '../components/TouchableOpacityCustom'
+import { StyleSheet, Alert } from 'react-native'
 
-export default function GeneroCad() {
+export default function GeneroCad(props) {
+    this.state = {
+        showToast:false
+    }
     const [descricao, setDescricao] = useState('');
-    async function handleSubmit() {
+    async function handleSubmit(event) {
         try {
-            const response = await api.post('/generos', 
-            {
-                descricao
-            });
-    
-            Alert.alert('Genero salvo com sucesso!');
+            console.log(descricao);
+            const response = await api.post('/generos',
+                {
+                    descricao
+                });
+            Alert.alert('Genero cadastrado com sucesso!')
             setDescricao('');
         } catch (error) {
             console.log(error);
-            Alert.alert('Erro ao realizar a operação!');
+            Alert.alert('Erro ao cadastrar o genero!')
         }
     }
-    return(
-        <KeyboardAvoidingView 
-            enabled 
-            behavior="padding"
-            style={styles.container} >
-            <Text style={styles.titulo}>Cadastro de Genero</Text>
-            <View style={styles.form}>
-                <TextInputLabelCustom
-                    label="Genero: *"
-                    placeholder="Informe o genero"
-                    value={descricao}
-                    onChangeText={setDescricao}/>
-                <TouchableOpacityCustom
-                    label="Salvar"
-                    onPress={handleSubmit}/>
-            </View>
-        </KeyboardAvoidingView>
+    return (
+        <Container>
+            <Header>
+                <Left>
+                    <Button transparent>
+                        <Icon name='menu' />
+                    </Button>
+                </Left>
+                <Body>
+                    <Title>Cadastro de Genero</Title>
+                </Body>
+            </Header>
+            <Content>
+                <Container style={styles.container}>
+                    <Item floatingLabel last style={{marginBottom:20}}>
+                        <Label>Genero</Label>
+                        <Input value={descricao} onChangeText={setDescricao} />
+                    </Item>
+                    <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
+                </Container>
+            </Content>
+            <Footer>
+                <FooterTab>
+                    <Button full>
+                        <Text>Footer</Text>
+                    </Button>
+                </FooterTab>
+            </Footer>
+        </Container>
     );
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }, 
-    titulo : {
-        fontSize: 20,
-        paddingBottom: 5
-    },
-    form: {
-        alignSelf: 'stretch',
-        paddingHorizontal: 30,
-        marginTop: 30
-    }
-});
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+}})
