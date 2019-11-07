@@ -6,11 +6,11 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
 
-export default function ListAutor() {
-    const [autores, setAutores] = useState([]);
+export default function ListEndereco() {
+    const [enderecos, setEnderecoes] = useState([]);
     async function carregarGeneros() {
-        const response = await api.get('/autores');
-        setAutores(response.data);
+        const response = await api.get('/enderecos');
+        setEnderecoes(response.data);
     }
     carregarGeneros();
     return (
@@ -23,13 +23,13 @@ export default function ListAutor() {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>Lista de autores</Title>
+                    <Title>Lista de endereços</Title>
                 </Body>
             </Header>
             <Content>
                 <View style={{paddingHorizontal:10}}>
-                    <FlatList data={autores}
-                        keyExtractor={autor => `${autor.id}`}
+                    <FlatList data={enderecos}
+                        keyExtractor={endereco => `${endereco.id}`}
                         renderItem={({ item }) => (
                             <Content>
                                 <Card>
@@ -41,7 +41,7 @@ export default function ListAutor() {
                                     <CardItem footer>
                                         <Button danger onPress={async () => {
                                             const id = item.id;
-                                            await api.delete(`/autors/${id}`);
+                                            await api.delete(`/enderecos/${id}`);
                                         }} >
                                             <Text>Excluir</Text>
                                         </Button>

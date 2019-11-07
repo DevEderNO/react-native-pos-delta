@@ -7,7 +7,6 @@ import FormGenero from './pages/FormGenero';
 import FormAutor from './pages/FormAutor';
 import ListGenero from './pages/ListGenero';
 import FormLivro from './pages/FormLivro';
-import LivroList from './pages/livroList';
 import FormEndereco from './pages/FormEndereco';
 import ListAutor from './pages/ListAutor';
 import FormEditora from './pages/FormEditora'
@@ -40,15 +39,6 @@ const Routes = createAppContainer(
                 drawerLabel: 'Cadastro de Livro',
                 drawerIcon: () =>(
                     <Icon name="book"></Icon>
-                )
-            }
-        },
-        ListaLivro: {
-            screen: LivroList,
-            navigationOptions:{
-                drawerLabel: 'Lista de Livro',
-                drawerIcon: () =>(
-                    <Icon name="list"></Icon>
                 )
             }
         },
