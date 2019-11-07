@@ -1,12 +1,19 @@
 import React from 'react'
-import {View, Text, Picker, StyleSheet} from 'react-native'
+import { Content, Icon, Picker } from "native-base";
 
 export default function PickerCustom(props) {
     return (
-        <View>
-            <Text style={styles.label}>{props.label}</Text>
-            <Picker selectedValue={props.selectedValue}
-                onValueChange={props.onValueChange}>
+        <Content>
+            <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                placeholder={props.placeholder}
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                style={props.style}
+                selectedValue={props.selectedValue}
+                onValueChange={props.onValueChange}
+            >
                 {
                     props.list.map((item) => {
                         return <Picker.Item key={item.id}
@@ -14,16 +21,7 @@ export default function PickerCustom(props) {
                             value={item.id} />
                     })
                 }
-            </Picker> 
-        </View>
-    )
+            </Picker>
+        </Content>
+    );
 }
-
-
-const styles = StyleSheet.create({
-    label: {
-        fontWeight: 'bold',
-        color: '#444',
-        marginBottom: 8
-    },
-})

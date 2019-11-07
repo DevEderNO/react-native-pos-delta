@@ -4,7 +4,7 @@ import {
     Container, Header, Title, Content,
     Footer, FooterTab, Button, Left,
     Body, Icon, Text, Item, Label,
-    Input
+    Input, View
 } from 'native-base';
 import api from '../services/api';
 
@@ -52,6 +52,7 @@ export default function EnderecoCad() {
 
     return (
         <Container>
+            <View style={{backgroundColor:'#1A237E',height:23}}></View>
             <Header>
                 <Left>
                     <Button transparent>
@@ -69,12 +70,12 @@ export default function EnderecoCad() {
                         <Input value={rua} onChangeText={setRua} />
                     </Item>
                     <Item floatingLabel style={styles.item}>
-                        <Label>Lote</Label>
-                        <Input value={lote} onChangeText={setLote} />
-                    </Item>
-                    <Item floatingLabel style={styles.item}>
                         <Label>Quadra</Label>
                         <Input value={quadra} onChangeText={setQuadra} />
+                    </Item>
+                    <Item floatingLabel style={styles.item}>
+                        <Label>Lote</Label>
+                        <Input value={lote} onChangeText={setLote} />
                     </Item>
                     <Item floatingLabel style={styles.item}>
                         <Label>Numero</Label>
@@ -87,10 +88,6 @@ export default function EnderecoCad() {
                     <Item floatingLabel style={styles.item}>
                         <Label>Complemento</Label>
                         <Input value={complemento} onChangeText={setComplemento} />
-                    </Item>
-                    <Item floatingLabel style={styles.item}>
-                        <Label>Bairro</Label>
-                        <Input value={bairro} onChangeText={setBairro} />
                     </Item>
                     <Item floatingLabel style={styles.item}>
                         <Label>Cidade</Label>

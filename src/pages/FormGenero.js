@@ -3,14 +3,14 @@ import {
     Container, Header, Title, Content,
     Footer, FooterTab, Button, Left,
     Body, Icon, Text, Item, Label,
-    Input
+    Input, View
 } from 'native-base';
 import api from '../services/api';
 import { StyleSheet, Alert } from 'react-native'
 
 export default function FormGenero(props) {
     this.state = {
-        showToast:false
+        showToast: false
     }
     const [descricao, setDescricao] = useState('');
     async function handleSubmit(event) {
@@ -29,6 +29,7 @@ export default function FormGenero(props) {
     }
     return (
         <Container>
+            <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
             <Header>
                 <Left>
                     <Button transparent>
@@ -40,13 +41,13 @@ export default function FormGenero(props) {
                 </Body>
             </Header>
             <Content>
-                <Container style={styles.container}>
-                    <Item floatingLabel last style={{marginBottom:20}}>
+                <View style={styles.container}>
+                    <Item floatingLabel last style={{ marginBottom: 20 }}>
                         <Label>Genero</Label>
                         <Input value={descricao} onChangeText={setDescricao} />
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
-                </Container>
+                </View>
             </Content>
             <Footer>
                 <FooterTab>
@@ -60,6 +61,6 @@ export default function FormGenero(props) {
 }
 const styles = StyleSheet.create({
     container: {
-    paddingHorizontal: 10,
-    justifyContent: 'center',
-}})
+        paddingHorizontal: 10,
+    }
+})

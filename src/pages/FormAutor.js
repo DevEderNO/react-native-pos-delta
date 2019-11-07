@@ -3,25 +3,32 @@ import {
     Container, Header, Title, Content,
     Footer, FooterTab, Button, Left,
     Body, Icon, Text, Item, Label,
-    Input
+    Input, View
 } from 'native-base';
 import api from '../services/api';
 import { StyleSheet, Alert } from 'react-native'
+import PickerCustom from '../components/PickerCustom';
 
-export default function FormAutor(props) {
-    this.state = {
-        showToast:false
-    }
+export default function FormAutor() {
     const [nome, setNome] = useState('');
-    async function handleSubmit(event) {
+    const [sexo, setSexo] = useState(0);
+    const sexos = [
+        { id: 0, nome: 'Masculino' },
+        { id: 1, nome: 'Feminino' }
+    ]
+    async function handleSubmit() {
         try {
             console.log(nome);
+            console.log(sexo);
             const response = await api.post('/autores',
                 {
-                    nome
-                });
+                    nome,
+                    sexo
+                }
+            );
             Alert.alert('Autor cadastrado com sucesso!')
             setNome('');
+            setSexo('');
         } catch (error) {
             console.log(error);
             Alert.alert('Erro ao cadastrar o autor!')
@@ -29,6 +36,7 @@ export default function FormAutor(props) {
     }
     return (
         <Container>
+            <View style={{backgroundColor:'#1A237E',height:23}}></View>
             <Header>
                 <Left>
                     <Button transparent>
@@ -41,9 +49,16 @@ export default function FormAutor(props) {
             </Header>
             <Content>
                 <Container style={styles.container}>
-                    <Item floatingLabel last style={{marginBottom:20}}>
+                    <Item floatingLabel last style={{ marginBottom: 20 }}>
                         <Label>Autor</Label>
                         <Input value={nome} onChangeText={setNome} />
+                    </Item>
+                    <Item>
+                        <PickerCustom
+                            list={sexos}
+                            placeholder="Selecione o sexo..."
+                            selectedValue={sexo}
+                            onValueChange={setSexo} />
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
                 </Container>
@@ -55,11 +70,12 @@ export default function FormAutor(props) {
                     </Button>
                 </FooterTab>
             </Footer>
-        </Container>
+        </Container >
     );
 }
 const styles = StyleSheet.create({
     container: {
-    paddingHorizontal: 10,
-    justifyContent: 'center',
-}})
+        paddingHorizontal: 10,
+        justifyContent: 'center',
+    }
+})

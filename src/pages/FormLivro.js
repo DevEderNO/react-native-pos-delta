@@ -4,18 +4,21 @@ import {
     Container, Header, Title, Content,
     Footer, FooterTab, Button, Left,
     Body, Icon, Text, Item, Label,
-    Input
+    Input, View
 } from 'native-base';
 import api from '../services/api';
 import moment from 'moment';
 import DatePickerCustom from '../components/DatePickerCustom'
+import PickerCustom from '../components/PickerCustom'
 
 export default function FormLivro() {
     const [nome, setNome] = useState('');
     const [valor, setValor] = useState('');
     const [generos, setGenero] = useState([]);
+    const [autores, setAutores] = useState([]);
     const [idGenero, setIdGenero] = useState('');
     const [volume, setVolume] = useState('');
+    const [idAutor, setIdAutor] = useState('');
     const [dataPublicacao, setDataPublicacao] = useState(new Date());
 
     async function carregarGeneros(){
@@ -27,7 +30,17 @@ export default function FormLivro() {
         }
     }
 
+    async function carregarAutores(){
+        try {
+            const response = await api.get('/autores');
+            setAutores(response.data);
+        } catch (error) {
+            Alert.alert('Erro ao carregar a lista de generos');
+        }
+    }
+
     carregarGeneros();
+    carregarAutores();
 
     async function handleSubmit() {
         try {
@@ -36,6 +49,7 @@ export default function FormLivro() {
                 nome,
                 valor,
                 genero:{id:idGenero},
+                autor:{id:idAutor},
                 volume,
                 dataPublicacao:moment(dataPublicacao, 'DD/MM/YYYY').format('YYYY-MM-DD')
             })
@@ -45,6 +59,7 @@ export default function FormLivro() {
             setValor('');
             setVolume('');
             setIdGenero('');
+            setIdAutor('');
             setDataPublicacao(new Date())
         } catch (error) {
             console.log(error);
@@ -53,6 +68,7 @@ export default function FormLivro() {
     }
     return(
         <Container>
+            <View style={{backgroundColor:'#1A237E',height:23}}></View>
             <Header>
                 <Left>
                     <Button transparent>
@@ -64,7 +80,7 @@ export default function FormLivro() {
                 </Body>
             </Header>
             <Content>
-                <Container style={styles.container}>
+                <View style={styles.container}>
                     <Item floatingLabel style={styles.item}>
                         <Label>Nome do livro</Label>
                         <Input value={nome} onChangeText={setNome} />
@@ -77,15 +93,30 @@ export default function FormLivro() {
                         <Label>Volume do livro</Label>
                         <Input value={volume} onChangeText={setVolume} keyboardType={'numeric'} />
                     </Item>
-                    <Item floatingLabel style={styles.item}></Item>
+                    <Item>
+                        <PickerCustom
+                            list={generos}
+                            placeholder="Selecione o genero..."
+                            selectedValue={idGenero}
+                            onValueChange={setIdGenero} />
+                    </Item>
+                    <Item>
+                        <PickerCustom
+                            list={autores}
+                            placeholder="Selecione o autor..."
+                            selectedValue={idAutor}
+                            onValueChange={setIdAutor} />
+                    </Item>
+                    <Item last style={styles.item}>
                         <DatePickerCustom
+                            placeHolderText="Selecione a data..."
                             label='Data de publicação'
-                            date={dataPublicacao} 
+                            date={dataPublicacao}
                             onDateChange={setDataPublicacao}
                         />
-
+                    </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
-                </Container>
+                </View>
             </Content>
             <Footer>
                 <FooterTab>
