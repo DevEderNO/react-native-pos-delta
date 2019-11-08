@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Container, Header, Title, Content,
     Footer, FooterTab, Button, Left,
@@ -7,26 +7,39 @@ import {
 } from 'native-base';
 import api from '../services/api';
 import { StyleSheet, Alert } from 'react-native'
-import PickerCustom from '../components/PickerCustom';
+import PickerCustomEndereco from '../components/PickerCustomEndereco';
 
-export default function FormCliente() {
+export default function FormCliente(props) {
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [idEndereco, setIdEndereco] = useState(0);
+    const [idEndereco, setIdEndereco] = useState('');
     const [enderecos, setEnderecos] = useState([]);
+
+    async function carregarEnderecos() {
+        try {
+            const response = await api.get('/enderecos');
+            setEnderecos(response.data);
+        } catch (error) {
+            Alert.alert('Erro ao carregar a lista de enderecos');
+        }
+    }
+
+    useEffect(() => {
+        carregarEnderecos();
+    }, [enderecos])
 
     async function handleSubmit() {
         try {
-
+            console.log(idEndereco);
             const response = await api.post('/clientes',
                 {
                     nome,
                     cpf,
                     email,
                     telefone,
-                    endereco:{"id":idEndereco}
+                    endereco: { "id": idEndereco }
                 }
             );
             Alert.alert('Cliente cadastrado com sucesso!')
@@ -41,11 +54,11 @@ export default function FormCliente() {
     }
     return (
         <Container>
-            <View style={{backgroundColor:'#1A237E',height:23}}></View>
+            <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -53,32 +66,32 @@ export default function FormCliente() {
                 </Body>
             </Header>
             <Content>
-                <Container style={styles.container}>
-                    <Item floatingLabel last style={{ marginBottom: 20 }}>
+                <View style={styles.container}>
+                    <Item stackedLabel style={{ marginBottom: 20 }}>
                         <Label>Nome</Label>
                         <Input value={nome} onChangeText={setNome} />
                     </Item>
-                    <Item floatingLabel last style={{ marginBottom: 20 }}>
+                    <Item stackedLabel style={{ marginBottom: 20 }}>
                         <Label>CPF</Label>
                         <Input value={cpf} onChangeText={setCpf} />
                     </Item>
-                    <Item floatingLabel last style={{ marginBottom: 20 }}>
+                    <Item stackedLabel style={{ marginBottom: 20 }}>
                         <Label>E-mail</Label>
                         <Input value={email} onChangeText={setEmail} />
                     </Item>
-                    <Item floatingLabel last style={{ marginBottom: 20 }}>
+                    <Item stackedLabel style={{ marginBottom: 20 }}>
                         <Label>Telefone</Label>
                         <Input value={telefone} onChangeText={setTelefone} />
                     </Item>
-                    <Item>
-                        <PickerCustom
+                    <Item picker>
+                        <PickerCustomEndereco
                             list={enderecos}
-                            placeholder="Selecione o endereco..."
+                            placeHolder="Selecione o endereco..."
                             selectedValue={idEndereco}
                             onValueChange={setIdEndereco} />
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
-                </Container>
+                </View>
             </Content>
             <Footer>
                 <FooterTab>

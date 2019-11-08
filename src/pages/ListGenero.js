@@ -1,25 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Container, Header, Title, Content, Button, Left,
-    Body, Icon, Text, Card, CardItem, View,Footer, FooterTab,
+    Body, Icon, Text, Card, CardItem, View, Footer, FooterTab,
 } from 'native-base';
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
 
-export default function ListGenero() {
+export default function ListGenero(props) {
     const [generos, setGeneros] = useState([]);
+
     async function carregarGeneros() {
-        const response = await api.get('/generos');
-        setGeneros(response.data);
+        try {
+            const response = await api.get('/generos');
+            setGeneros(response.data);
+        } catch (error) {
+            Alert.alert('Erro ao carregar a lista de generos');
+        }
     }
+
+    useEffect(() => {
+        carregarGeneros()
+    }, [])
+
     carregarGeneros();
     return (
         <Container>
-            <View style={{backgroundColor:'#1A237E',height:23}}></View>
+            <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -27,7 +37,7 @@ export default function ListGenero() {
                 </Body>
             </Header>
             <Content>
-                <View style={{paddingHorizontal:10}}>
+                <View style={{ paddingHorizontal: 10 }}>
                     <FlatList data={generos}
                         keyExtractor={genero => `${genero.id}`}
                         renderItem={({ item }) => (

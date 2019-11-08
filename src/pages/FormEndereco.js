@@ -8,7 +8,7 @@ import {
 } from 'native-base';
 import api from '../services/api';
 
-export default function EnderecoCad() {
+export default function EnderecoCad(props) {
     const [bairro, setBairro] = useState('');
     const [cidade, setCidade] = useState('');
     const [complemento, setComplemento] = useState('');
@@ -52,11 +52,11 @@ export default function EnderecoCad() {
 
     return (
         <Container>
-            <View style={{backgroundColor:'#1A237E',height:23}}></View>
+            <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -64,45 +64,45 @@ export default function EnderecoCad() {
                 </Body>
             </Header>
             <Content>
-                <Container style={styles.container}>
-                    <Item floatingLabel style={styles.item}>
+                <View style={styles.container}>
+                    <Item stackedLabel >
                         <Label>Rua</Label>
                         <Input value={rua} onChangeText={setRua} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Quadra</Label>
                         <Input value={quadra} onChangeText={setQuadra} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Lote</Label>
                         <Input value={lote} onChangeText={setLote} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Numero</Label>
                         <Input value={numero} onChangeText={setNumero} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Bairro</Label>
                         <Input value={bairro} onChangeText={setBairro} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Complemento</Label>
                         <Input value={complemento} onChangeText={setComplemento} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Cidade</Label>
                         <Input value={cidade} onChangeText={setCidade} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Estado</Label>
                         <Input value={estado} onChangeText={setEstado} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Pais</Label>
                         <Input value={pais} onChangeText={setPais} />
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
-                </Container>
+                </View>
             </Content>
             <Footer>
                 <FooterTab>
@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
         paddingVertical: 5,
-        marginBottom:50
     },
     item: {
         marginVertical: 5

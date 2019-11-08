@@ -6,7 +6,7 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
 
-export default function ListAutor() {
+export default function ListAutor(props) {
     const [autores, setAutores] = useState([]);
     async function carregarGeneros() {
         const response = await api.get('/autores');
@@ -19,7 +19,7 @@ export default function ListAutor() {
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -27,7 +27,7 @@ export default function ListAutor() {
                 </Body>
             </Header>
             <Content>
-                <View style={{paddingHorizontal:10}}>
+                <View style={{ paddingHorizontal: 10 }}>
                     <FlatList data={autores}
                         keyExtractor={autor => `${autor.id}`}
                         renderItem={({ item }) => (

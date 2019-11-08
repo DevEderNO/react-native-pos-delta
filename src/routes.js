@@ -5,12 +5,15 @@ import {createAppContainer, DrawerItems} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import FormGenero from './pages/FormGenero';
 import FormAutor from './pages/FormAutor';
-import ListGenero from './pages/ListGenero';
 import FormLivro from './pages/FormLivro';
 import FormEndereco from './pages/FormEndereco';
-import ListAutor from './pages/ListAutor';
 import FormEditora from './pages/FormEditora'
+import FormCliente from './pages/FormCliente'
+import ListGenero from './pages/ListGenero';
+import ListAutor from './pages/ListAutor';
 import ListEditora from './pages/ListEditora'
+import ListCliente from './pages/ListCliente'
+import ListEndereco from './pages/ListEndereco'
 
 const Routes = createAppContainer(
     createDrawerNavigator({
@@ -42,15 +45,6 @@ const Routes = createAppContainer(
                 )
             }
         },
-        CadastroEndereco: {
-            screen: FormEndereco,
-            navigationOptions:{
-                drawerLabel: 'Cadastro de Endereço',
-                drawerIcon: () =>(
-                    <Icon name="map"></Icon>
-                )
-            }
-        },
         FormAutor: {
             screen: FormAutor,
             navigationOptions:{
@@ -63,7 +57,7 @@ const Routes = createAppContainer(
         ListAutor:{
             screen: ListAutor,
             navigationOptions:{
-                drawerLabel: 'Lista de Autores',
+                drawerLabel: 'Lista de Autor',
                 drawerIcon: () =>(
                     <Icon name="list"></Icon>
                 )
@@ -81,12 +75,48 @@ const Routes = createAppContainer(
         ListEditora:{
             screen: ListEditora,
             navigationOptions:{
-                drawerLabel: 'Lista de Editoras',
+                drawerLabel: 'Lista de Editora',
                 drawerIcon: () =>(
                     <Icon name="list"></Icon>
                 )
             }
-        }
+        },
+        FormCliente: {
+            screen: FormCliente,
+            navigationOptions:{
+                drawerLabel: 'Cadastro de Cliente',
+                drawerIcon: () =>(
+                    <Icon name="person"></Icon>
+                )
+            }
+        },
+        ListCliente:{
+            screen: ListCliente,
+            navigationOptions:{
+                drawerLabel: 'Lista de Cliente',
+                drawerIcon: () =>(
+                    <Icon name="list"></Icon>
+                )
+            }
+        },
+        CadastroEndereco: {
+            screen: FormEndereco,
+            navigationOptions:{
+                drawerLabel: 'Cadastro de Endereço',
+                drawerIcon: () =>(
+                    <Icon name="map"></Icon>
+                )
+            }
+        },
+        ListEndereco: {
+            screen: ListEndereco,
+            navigationOptions:{
+                drawerLabel: 'Lista de Endereço',
+                drawerIcon: () =>(
+                    <Icon name="list"></Icon>
+                )
+            }
+        },
     })
 );
 

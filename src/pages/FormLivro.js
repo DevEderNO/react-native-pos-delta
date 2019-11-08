@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {StyleSheet, Alert} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Alert } from 'react-native'
 import {
     Container, Header, Title, Content,
     Footer, FooterTab, Button, Left,
@@ -11,7 +11,7 @@ import moment from 'moment';
 import DatePickerCustom from '../components/DatePickerCustom'
 import PickerCustom from '../components/PickerCustom'
 
-export default function FormLivro() {
+export default function FormLivro(props) {
     const [nome, setNome] = useState('');
     const [valor, setValor] = useState('');
     const [generos, setGenero] = useState([]);
@@ -19,9 +19,9 @@ export default function FormLivro() {
     const [idGenero, setIdGenero] = useState('');
     const [volume, setVolume] = useState('');
     const [idAutor, setIdAutor] = useState('');
-    const [dataPublicacao, setDataPublicacao] = useState(new Date());
+    const [dataPublicacao, setDataPublicacao] = useState(moment(Date.now()));
 
-    async function carregarGeneros(){
+    async function carregarGeneros() {
         try {
             const response = await api.get('/generos');
             setGenero(response.data);
@@ -30,7 +30,7 @@ export default function FormLivro() {
         }
     }
 
-    async function carregarAutores(){
+    async function carregarAutores() {
         try {
             const response = await api.get('/autores');
             setAutores(response.data);
@@ -39,21 +39,26 @@ export default function FormLivro() {
         }
     }
 
-    carregarGeneros();
-    carregarAutores();
+    useEffect(() => {
+        carregarGeneros();
+    }, []);
+    useEffect(() => {
+        carregarAutores();
+    }, []);
 
     async function handleSubmit() {
         try {
-            const response = await api.post('/livros', 
-            {
-                nome,
-                valor,
-                genero:{id:idGenero},
-                autor:{id:idAutor},
-                volume,
-                dataPublicacao:moment(dataPublicacao, 'DD/MM/YYYY').format('YYYY-MM-DD')
-            })
-    
+            console.log(dataPublicacao);
+            const response = await api.post('/livros',
+                {
+                    nome,
+                    valor,
+                    genero: { id: idGenero },
+                    autor: { id: idAutor },
+                    volume,
+                    dataPublicacao: moment(dataPublicacao, 'DD/MM/YYYY').format('YYYY-MM-DD')
+                })
+
             Alert.alert('Livro salvo com sucesso!');
             setNome('');
             setValor('');
@@ -66,13 +71,13 @@ export default function FormLivro() {
             Alert.alert('Erro ao realizar a operação!');
         }
     }
-    return(
+    return (
         <Container>
-            <View style={{backgroundColor:'#1A237E',height:23}}></View>
+            <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -81,15 +86,15 @@ export default function FormLivro() {
             </Header>
             <Content>
                 <View style={styles.container}>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Nome do livro</Label>
                         <Input value={nome} onChangeText={setNome} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Valor do livro</Label>
-                        <Input value={valor} onChangeText={setValor} keyboardType={'numeric'} />
+                        <Input onChangeText={setValor} keyboardType={'numeric'} />
                     </Item>
-                    <Item floatingLabel style={styles.item}>
+                    <Item stackedLabel >
                         <Label>Volume do livro</Label>
                         <Input value={volume} onChangeText={setVolume} keyboardType={'numeric'} />
                     </Item>
@@ -107,7 +112,7 @@ export default function FormLivro() {
                             selectedValue={idAutor}
                             onValueChange={setIdAutor} />
                     </Item>
-                    <Item last style={styles.item}>
+                    <Item >
                         <DatePickerCustom
                             placeHolderText="Selecione a data..."
                             label='Data de publicação'
@@ -132,8 +137,8 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
         paddingVertical: 5,
-    }, 
-    item:{
+    },
+    item: {
         marginVertical: 5
     }
 });

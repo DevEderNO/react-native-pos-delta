@@ -9,7 +9,7 @@ import api from '../services/api';
 import { StyleSheet, Alert } from 'react-native'
 import PickerCustom from '../components/PickerCustom';
 
-export default function FormAutor() {
+export default function FormAutor(props) {
     const [nome, setNome] = useState('');
     const [sexo, setSexo] = useState(0);
     const sexos = [
@@ -40,7 +40,7 @@ export default function FormAutor() {
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()}/>
                     </Button>
                 </Left>
                 <Body>
@@ -49,7 +49,7 @@ export default function FormAutor() {
             </Header>
             <Content>
                 <Container style={styles.container}>
-                    <Item floatingLabel last style={{ marginBottom: 20 }}>
+                    <Item stackedLabel  style={{ marginBottom: 20 }}>
                         <Label>Autor</Label>
                         <Input value={nome} onChangeText={setNome} />
                     </Item>

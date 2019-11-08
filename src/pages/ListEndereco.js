@@ -6,7 +6,7 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
 
-export default function ListEndereco() {
+export default function ListEndereco(props) {
     const [enderecos, setEnderecoes] = useState([]);
     async function carregarGeneros() {
         const response = await api.get('/enderecos');
@@ -19,7 +19,7 @@ export default function ListEndereco() {
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -27,7 +27,7 @@ export default function ListEndereco() {
                 </Body>
             </Header>
             <Content>
-                <View style={{paddingHorizontal:10}}>
+                <View style={{ paddingHorizontal: 10 }}>
                     <FlatList data={enderecos}
                         keyExtractor={endereco => `${endereco.id}`}
                         renderItem={({ item }) => (

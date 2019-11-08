@@ -8,7 +8,7 @@ import {
 import api from '../services/api';
 import { StyleSheet, Alert } from 'react-native'
 
-export default function FormEditora() {
+export default function FormEditora(props) {
   const [nome, setNome] = useState('');
   async function handleSubmit() {
     try {
@@ -30,7 +30,7 @@ export default function FormEditora() {
       <Header>
         <Left>
           <Button transparent>
-            <Icon name='menu' />
+            <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
           </Button>
         </Left>
         <Body>
@@ -39,7 +39,7 @@ export default function FormEditora() {
       </Header>
       <Content>
         <View style={styles.container}>
-          <Item floatingLabel last style={{ marginBottom: 20 }}>
+          <Item stackedLabel style={{ marginBottom: 20 }}>
             <Label>Editora</Label>
             <Input value={nome} onChangeText={setNome} />
           </Item>

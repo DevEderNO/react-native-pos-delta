@@ -9,13 +9,9 @@ import api from '../services/api';
 import { StyleSheet, Alert } from 'react-native'
 
 export default function FormGenero(props) {
-    this.state = {
-        showToast: false
-    }
     const [descricao, setDescricao] = useState('');
-    async function handleSubmit(event) {
+    async function handleSubmit() {
         try {
-            console.log(descricao);
             const response = await api.post('/generos',
                 {
                     descricao
@@ -27,13 +23,14 @@ export default function FormGenero(props) {
             Alert.alert('Erro ao cadastrar o genero!')
         }
     }
+
     return (
         <Container>
             <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' />
+                        <Icon name='menu' onPress={() =>props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -42,7 +39,7 @@ export default function FormGenero(props) {
             </Header>
             <Content>
                 <View style={styles.container}>
-                    <Item floatingLabel last style={{ marginBottom: 20 }}>
+                    <Item stackedLabel  style={{ marginBottom: 20 }}>
                         <Label>Genero</Label>
                         <Input value={descricao} onChangeText={setDescricao} />
                     </Item>
@@ -62,5 +59,6 @@ export default function FormGenero(props) {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
+        paddingTop: 10
     }
 })
