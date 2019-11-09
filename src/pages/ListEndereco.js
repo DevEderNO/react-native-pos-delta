@@ -32,7 +32,7 @@ export default function ListEndereco(props) {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>Lista de endereços</Title>
+                    <Title>Lista de Endereços</Title>
                 </Body>
             </Header>
             <Content>

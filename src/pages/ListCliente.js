@@ -27,7 +27,7 @@ export default function ListCliente(props) {
           </Button>
         </Left>
         <Body>
-          <Title>Lista de clientes</Title>
+          <Title>Lista de Clientes</Title>
         </Body>
       </Header>
       <Content>

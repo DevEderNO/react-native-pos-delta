@@ -24,7 +24,7 @@ export default function ListEditora(props) {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>Cadastro de Editora</Title>
+                    <Title>Cadastro de Editoras</Title>
                 </Body>
             </Header>
             <Content>

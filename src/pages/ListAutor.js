@@ -34,7 +34,7 @@ export default function ListAutor(props) {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>Lista de autores</Title>
+                    <Title>Lista de Autores</Title>
                 </Body>
             </Header>
             <Content>

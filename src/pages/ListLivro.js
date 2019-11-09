@@ -24,7 +24,7 @@ export default function ListLivro(props) {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>Lista de livros</Title>
+                    <Title>Lista de Livros</Title>
                 </Body>
             </Header>
             <Content>
