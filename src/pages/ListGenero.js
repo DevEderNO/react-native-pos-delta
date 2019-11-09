@@ -33,7 +33,7 @@ export default function ListGenero(props) {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>Cadastro de Generos</Title>
+                    <Title>Lista de Generos</Title>
                 </Body>
             </Header>
             <Content>
