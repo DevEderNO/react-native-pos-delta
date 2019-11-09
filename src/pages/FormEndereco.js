@@ -97,7 +97,7 @@ export default function EnderecoCad(props) {
                         <Label>Estado</Label>
                         <Input value={estado} onChangeText={setEstado} />
                     </Item>
-                    <Item stackedLabel >
+                    <Item stackedLabel style={{marginBottom:10}}>
                         <Label>Pais</Label>
                         <Input value={pais} onChangeText={setPais} />
                     </Item>
@@ -123,62 +123,3 @@ const styles = StyleSheet.create({
         marginVertical: 5
     }
 });
-{/* <ScrollView>
-<KeyboardAvoidingView
-  enabled
-  behavior="padding"
-  style={styles.container}>
-  <Text style={styles.titulo}>Cadastro de Endereço</Text>
-  <View style={styles.form}>
-    <TextInputLabelCustom
-      label="Rua: *"
-      placeholder="Informe a rua"
-      value={rua}
-      onChangeText={setRua}/>
-    <TextInputLabelCustom
-      label="Lote: *"
-      placeholder="Informe a lote"
-      value={lote}
-      onChangeText={setLote}/>
-    <TextInputLabelCustom
-      label="Quadra: *"
-      placeholder="Informe a quadra"
-      value={quadra}
-      onChangeText={setQuadra}/>
-    <TextInputLabelCustom
-      label="Numero: *"
-      placeholder="Informe a numero"
-      value={numero}
-      onChangeText={setNumero}/>
-    <TextInputLabelCustom
-      label="Bairro: *"
-      placeholder="Informe a bairro"
-      value={bairro}
-      onChangeText={setBairro}/>
-    <TextInputLabelCustom
-      label="Complemento: *"
-      placeholder="Informe a complemento"
-      value={complemento}
-      onChangeText={setComplemento}/>
-    <TextInputLabelCustom
-      label="Cidade: *"
-      placeholder="Informe a cidade"
-      value={cidade}
-      onChangeText={setCidade}/>
-    <TextInputLabelCustom
-      label="Estado: *"
-      placeholder="Informe a estado"
-      value={estado}
-      onChangeText={setEstado}/>
-    <TextInputLabelCustom
-      label="Pais: *"
-      placeholder="Informe a pais"
-      value={pais}
-      onChangeText={setPais}/>
-    <TouchableOpacityCustom 
-      label="Salvar"
-      onPress={handleSubmit}/>
-  </View>
-
-</KeyboardAvoidingView>
-</ScrollView> */}

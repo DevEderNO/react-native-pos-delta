@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Alert } from 'react-native';
 import {
     Container, Header, Title, Content, Button, Left,
-    Body, Icon, Text, Card, CardItem, View, Footer, FooterTab,
+    Body, Icon, Text, Card, CardItem, View, Footer, FooterTab
 } from 'native-base';
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
@@ -20,9 +21,8 @@ export default function ListGenero(props) {
 
     useEffect(() => {
         carregarGeneros()
-    }, [])
+    }, [generos])
 
-    carregarGeneros();
     return (
         <Container>
             <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
@@ -44,7 +44,7 @@ export default function ListGenero(props) {
                             <Container style={{ height: 'auto' }}>
                                 <Content>
                                     <Card>
-                                        <CardItem header>
+                                        <CardItem header bordered>
                                             <Text >{item.descricao}</Text>
                                         </CardItem>
                                         <CardItem footer>
@@ -71,28 +71,3 @@ export default function ListGenero(props) {
         </Container>
     );
 }
-
-
-
-        // <View style={styles.container}>
-        //     <View style={styles.top}></View>
-        //     <Text style={styles.titulo}>Lista de Genero</Text>
-        //     <FlatList data={generos}
-        //         style={styles.lista}
-        //         keyExtractor={genero => `${genero.id}`}
-        //         renderItem={({ item }) => (
-        //             <View style={styles.container}>
-        //                 <View style={styles.card}>
-        //                     <Text style={styles.label} >Id: {item.id}</Text>
-        //                     <Text style={styles.label}>Descrição: {item.descricao}</Text>
-        //                     <TouchableOpacity onPress={async () => {
-        //                         const id = item.id;
-        //                         await api.delete(`/generos/${id}`);
-        //                     }}>
-        //                         <Text style={styles.botaoTexto}>Excluir</Text>
-        //                     </TouchableOpacity>
-        //                 </View>
-        //             </View>
-        //         )}
-        //     />
-        // </View>

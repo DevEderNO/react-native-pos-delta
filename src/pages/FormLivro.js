@@ -4,7 +4,7 @@ import {
     Container, Header, Title, Content,
     Footer, FooterTab, Button, Left,
     Body, Icon, Text, Item, Label,
-    Input, View
+    Input, View, Form
 } from 'native-base';
 import api from '../services/api';
 import moment from 'moment';
@@ -16,9 +16,11 @@ export default function FormLivro(props) {
     const [valor, setValor] = useState('');
     const [generos, setGenero] = useState([]);
     const [autores, setAutores] = useState([]);
-    const [idGenero, setIdGenero] = useState('');
+    const [editoras, setEditoras] = useState([]);
+    const [idGenero, setIdGenero] = useState(-1);
+    const [idAutor, setIdAutor] = useState(-1);
+    const [idEditora, setIdEditora] = useState(-1);
     const [volume, setVolume] = useState('');
-    const [idAutor, setIdAutor] = useState('');
     const [dataPublicacao, setDataPublicacao] = useState(moment(Date.now()));
 
     async function carregarGeneros() {
@@ -38,13 +40,24 @@ export default function FormLivro(props) {
             Alert.alert('Erro ao carregar a lista de generos');
         }
     }
+    async function carregarEditora() {
+        try {
+            const response = await api.get('/editoras');
+            setEditoras(response.data);
+        } catch (error) {
+            Alert.alert('Erro ao carregar a lista de editoras');
+        }
+    }
 
     useEffect(() => {
-        carregarGeneros();
-    }, []);
+        carregarGeneros()
+    }, [generos]);
     useEffect(() => {
-        carregarAutores();
-    }, []);
+        carregarAutores()
+    }, [autores]);
+    useEffect(() => {
+        carregarEditora()
+    }, [editoras]);
 
     async function handleSubmit() {
         try {
@@ -55,6 +68,7 @@ export default function FormLivro(props) {
                     valor,
                     genero: { id: idGenero },
                     autor: { id: idAutor },
+                    editora:{id:idEditora},
                     volume,
                     dataPublicacao: moment(dataPublicacao, 'DD/MM/YYYY').format('YYYY-MM-DD')
                 })
@@ -63,8 +77,9 @@ export default function FormLivro(props) {
             setNome('');
             setValor('');
             setVolume('');
-            setIdGenero('');
-            setIdAutor('');
+            setIdGenero(-1);
+            setIdAutor(-1);
+            setIdEditora(-1);
             setDataPublicacao(new Date())
         } catch (error) {
             console.log(error);
@@ -86,40 +101,62 @@ export default function FormLivro(props) {
             </Header>
             <Content>
                 <View style={styles.container}>
-                    <Item stackedLabel >
-                        <Label>Nome do livro</Label>
-                        <Input value={nome} onChangeText={setNome} />
-                    </Item>
-                    <Item stackedLabel >
-                        <Label>Valor do livro</Label>
-                        <Input onChangeText={setValor} keyboardType={'numeric'} />
-                    </Item>
-                    <Item stackedLabel >
-                        <Label>Volume do livro</Label>
-                        <Input value={volume} onChangeText={setVolume} keyboardType={'numeric'} />
-                    </Item>
-                    <Item>
-                        <PickerCustom
-                            list={generos}
-                            placeholder="Selecione o genero..."
-                            selectedValue={idGenero}
-                            onValueChange={setIdGenero} />
-                    </Item>
-                    <Item>
-                        <PickerCustom
-                            list={autores}
-                            placeholder="Selecione o autor..."
-                            selectedValue={idAutor}
-                            onValueChange={setIdAutor} />
-                    </Item>
-                    <Item >
-                        <DatePickerCustom
-                            placeHolderText="Selecione a data..."
-                            label='Data de publicação'
-                            date={dataPublicacao}
-                            onDateChange={setDataPublicacao}
-                        />
-                    </Item>
+                    <Form>
+                        <Item stackedLabel >
+                            <Label>Nome do livro</Label>
+                            <Input value={nome} onChangeText={setNome} />
+                        </Item>
+                        <Item stackedLabel >
+                            <Label>Valor do livro</Label>
+                            <Input onChangeText={setValor} keyboardType={'numeric'} />
+                        </Item>
+                        <Item stackedLabel >
+                            <Label>Volume do livro</Label>
+                            <Input value={volume} onChangeText={setVolume} keyboardType={'numeric'} />
+                        </Item>
+                        <Item stackedLabel >
+                            <Label>Genero</Label>   
+                            <Item picker>
+                                <PickerCustom
+                                    list={generos}
+                                    placeholder="Selecione o genero..."
+                                    selectedValue={idGenero}
+                                    onValueChange={setIdGenero} />
+                            </Item>
+                        </Item>
+                        <Item stackedLabel>
+                            <Label>Autor</Label>  
+                            <Item picker>
+                                <PickerCustom
+                                    list={autores}
+                                    placeholder="Selecione o autor..."
+                                    selectedValue={idAutor}
+                                    onValueChange={setIdAutor} />
+                            </Item>
+                        </Item>
+                        <Item stackedLabel>
+                            <Label>Editora</Label>  
+                            <Item picker>
+                                <PickerCustom
+                                    list={editoras}
+                                    placeholder="Selecione o autor..."
+                                    selectedValue={idEditora}
+                                    onValueChange={setIdEditora} />
+                            </Item>
+                        </Item>
+                        <Item stackedLabel last>
+                            <Label>Data de publicação</Label> 
+                            <Item picker>
+                                <DatePickerCustom
+                                    placeHolderText="Selecione a data..."
+                                    label='Data de publicação'
+                                    date={dataPublicacao}
+                                    onDateChange={setDataPublicacao}
+                                />
+                            </Item>
+                        </Item>
+
+                    </Form>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
                 </View>
             </Content>
@@ -136,53 +173,9 @@ export default function FormLivro(props) {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
-        paddingVertical: 5,
+        marginVertical: 5,
     },
     item: {
         marginVertical: 5
     }
 });
-
-{/* <KeyboardAvoidingView 
-            enabled 
-            behavior="padding"
-            style={styles.container} >
-            <Text style={styles.titulo}>Cadastro de Livro</Text>
-            <View style={styles.form}>
-                <TextInputLabelCustom
-                    label="Nome: *"
-                    placeholder="Nome do Livro"
-                    value={nome}
-                    onChangeText={setNome}/>
-                <TextInputLabelCustom
-                    label="Valor: *"
-                    placeholder="Valor do Livro"
-                    keyboardType={'numeric'}
-                    value={valor}
-                    onChangeText={setValor}/>
-                <TextInputLabelCustom
-                    label="Volume: *"
-                    placeholder="Volume do Livro"
-                    keyboardType={'numeric'}
-                    value={volume}
-                    onChangeText={setVolume}/>
-                <DatePickerCustom
-                    label="Data de publicação: *"
-                    date={dataPublicacao}
-                    onDateChange={setDataPublicacao}/>
-                <Text style={styles.label}>Genero: *</Text>
-                <Picker selectedValue={idGenero}
-                    onValueChange={setIdGenero}>
-                    {
-                        generos.map((genero) =>{
-                            return <Picker.Item key={genero.id} 
-                                label={genero.descricao}
-                                value={genero.id} />
-                        })
-                    }
-                </Picker> 
-                <TouchableOpacityCustom
-                    label="Salvar"
-                    onPress={handleSubmit}/>
-            </View>
-        </KeyboardAvoidingView> */}

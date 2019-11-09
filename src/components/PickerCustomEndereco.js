@@ -14,6 +14,10 @@ export default function PickerCustomEndereco(props) {
                 selectedValue={props.selectedValue}
                 onValueChange={props.onValueChange}
             >
+                <Picker.Item key={-1}
+                            label="Selecione..."
+                            color="#d3d3d3"
+                            value={-1} />
                 {
                     props.list.map((item) => {
                         return <Picker.Item key={item.id}

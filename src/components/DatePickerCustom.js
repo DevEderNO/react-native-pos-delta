@@ -1,5 +1,6 @@
 import React from 'react'
-import { Content, Text, DatePicker
+import {
+    Content, Text, DatePicker, Container
 } from 'native-base';
 
 export default function DatePickerCustom(props) {
@@ -10,6 +11,7 @@ export default function DatePickerCustom(props) {
                 minimumDate={new Date(1500, 1, 1)}
                 maximumDate={new Date(2100, 1, 1)}
                 locale={"pt"}
+                date={props.date}
                 timeZoneOffsetInMinutes={undefined}
                 modalTransparent={false}
                 animationType={"fade"}
@@ -20,9 +22,6 @@ export default function DatePickerCustom(props) {
                 onDateChange={props.onDateChange}
                 disabled={false}
             />
-            <Text>
-                {props.label}: {props.date.toString().substr(4, 12)}
-            </Text>
         </Content>
     )
 }

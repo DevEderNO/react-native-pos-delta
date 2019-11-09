@@ -39,7 +39,7 @@ export default function FormGenero(props) {
             </Header>
             <Content>
                 <View style={styles.container}>
-                    <Item stackedLabel  style={{ marginBottom: 20 }}>
+                    <Item stackedLabel  style={{ marginBottom: 10 }}>
                         <Label>Genero</Label>
                         <Input value={descricao} onChangeText={setDescricao} />
                     </Item>

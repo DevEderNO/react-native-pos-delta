@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Alert} from 'react-native'
 import {
     Container, Header, Title, Content, Button, Left,
     Body, Icon, Text, Card, CardItem, View, Footer, FooterTab,
@@ -33,17 +34,16 @@ export default function ListLivro(props) {
                         renderItem={({ item }) => (
                             <Content>
                                 <Card>
-                                    <CardItem header>
+                                    <CardItem header bordered>
                                             <Text >{item.nome}</Text>
                                     </CardItem>
                                     <CardItem>
                                         <Body>
-                                            <Text >{item.genero.descricao}</Text>
-                                            <Text >{item.valor}</Text>
-                                            <Text >{item.volume}</Text>
-                                            <Text >{item.volume}</Text>
-                                            <Text >{item.autor.nome}</Text>
-                                            <Text >{item.editora.nome}</Text>
+                                            <Text >Genero: {item.genero.descricao}</Text>
+                                            <Text >R$: {item.valor}</Text>
+                                            <Text >Volume: {item.volume}</Text>
+                                            <Text >Autor: {item.autor.nome}</Text>
+                                            <Text >Editora: {item.editora.nome}</Text>
                                         </Body>
                                     </CardItem>
                                     <CardItem footer>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'native-base';
 
-import {createAppContainer, DrawerItems} from 'react-navigation';
+import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import FormGenero from './pages/FormGenero';
 import FormAutor from './pages/FormAutor';
@@ -10,6 +10,7 @@ import FormEndereco from './pages/FormEndereco';
 import FormEditora from './pages/FormEditora'
 import FormCliente from './pages/FormCliente'
 import ListGenero from './pages/ListGenero';
+import ListLivro from './pages/ListLivro';
 import ListAutor from './pages/ListAutor';
 import ListEditora from './pages/ListEditora'
 import ListCliente from './pages/ListCliente'
@@ -42,6 +43,15 @@ const Routes = createAppContainer(
                 drawerLabel: 'Cadastro de Livro',
                 drawerIcon: () =>(
                     <Icon name="book"></Icon>
+                )
+            }
+        },
+        ListLivro:{
+            screen: ListLivro,
+            navigationOptions:{
+                drawerLabel: 'Lista de Livros',
+                drawerIcon: () =>(
+                    <Icon name="list"></Icon>
                 )
             }
         },

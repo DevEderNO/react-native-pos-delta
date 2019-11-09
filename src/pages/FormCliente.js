@@ -47,6 +47,7 @@ export default function FormCliente(props) {
             setCpf('')
             setEmail('')
             setTelefone('')
+            setIdEndereco(-1)
         } catch (error) {
             console.log(error);
             Alert.alert('Erro ao cadastrar o autor!')
@@ -67,28 +68,31 @@ export default function FormCliente(props) {
             </Header>
             <Content>
                 <View style={styles.container}>
-                    <Item stackedLabel style={{ marginBottom: 20 }}>
+                    <Item stackedLabel>
                         <Label>Nome</Label>
                         <Input value={nome} onChangeText={setNome} />
                     </Item>
-                    <Item stackedLabel style={{ marginBottom: 20 }}>
+                    <Item stackedLabel>
                         <Label>CPF</Label>
                         <Input value={cpf} onChangeText={setCpf} />
                     </Item>
-                    <Item stackedLabel style={{ marginBottom: 20 }}>
+                    <Item stackedLabel>
                         <Label>E-mail</Label>
                         <Input value={email} onChangeText={setEmail} />
                     </Item>
-                    <Item stackedLabel style={{ marginBottom: 20 }}>
+                    <Item stackedLabel>
                         <Label>Telefone</Label>
                         <Input value={telefone} onChangeText={setTelefone} />
                     </Item>
-                    <Item picker>
-                        <PickerCustomEndereco
-                            list={enderecos}
-                            placeHolder="Selecione o endereco..."
-                            selectedValue={idEndereco}
-                            onValueChange={setIdEndereco} />
+                    <Item stackedLabel style={{marginBottom:10}}>
+                        <Label>Endereço</Label>
+                        <Item>
+                            <PickerCustomEndereco
+                                list={enderecos}
+                                placeHolder="Selecione o endereco..."
+                                selectedValue={idEndereco}
+                                onValueChange={setIdEndereco} />
+                        </Item>
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
                 </View>

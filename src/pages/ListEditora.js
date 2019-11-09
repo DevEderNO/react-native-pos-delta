@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Alert} from 'react-native'
 import {
     Container, Header, Title, Content, Button, Left,
     Body, Icon, Text, Card, CardItem, View, Footer, FooterTab,
@@ -34,7 +35,7 @@ export default function ListEditora(props) {
                             <Container style={{ height: 'auto' }}>
                                 <Content>
                                     <Card>
-                                        <CardItem header>
+                                        <CardItem header bordered>
                                             <Text >{item.nome}</Text>
                                         </CardItem>
                                         <CardItem footer>

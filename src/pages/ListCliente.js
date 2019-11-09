@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, Alert } from 'react-native';
 import {
   Container, Header, Title, Content, Button, Left,
   Body, Icon, Text, Card, CardItem, View, Footer, FooterTab
@@ -37,12 +37,14 @@ export default function ListCliente(props) {
             renderItem={({ item }) => (
               <Content>
                 <Card>
+                  <CardItem header bordered>
+                      <Text >{item.nome}</Text>
+                  </CardItem>
                   <CardItem>
                     <Body>
-                      <Text >{item.nome}</Text>
-                      <Text >{item.cpf}</Text>
-                      <Text >{item.email}</Text>
-                      <Text >{item.telefone}</Text>
+                      <Text >CPF: {item.cpf}</Text>
+                      <Text >E-mail: {item.email}</Text>
+                      <Text >Telefone: {item.telefone}</Text>
                     </Body>
                   </CardItem>
                   <CardItem footer>

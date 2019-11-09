@@ -11,15 +11,18 @@ import PickerCustom from '../components/PickerCustom';
 
 export default function FormAutor(props) {
     const [nome, setNome] = useState('');
-    const [sexo, setSexo] = useState(0);
+    const [sexo, setSexo] = useState(-1);
     const sexos = [
+        { id: -1, nome: 'Selecione o sexo...' },
         { id: 0, nome: 'Masculino' },
-        { id: 1, nome: 'Feminino' }
+        { id: 1, nome: 'Feminino' },
     ]
     async function handleSubmit() {
+        if(sexo === -1){
+            Alert.alert('Sexo não selecionado');
+            return
+        }
         try {
-            console.log(nome);
-            console.log(sexo);
             const response = await api.post('/autores',
                 {
                     nome,
@@ -28,7 +31,7 @@ export default function FormAutor(props) {
             );
             Alert.alert('Autor cadastrado com sucesso!')
             setNome('');
-            setSexo('');
+            setSexo(-1);
         } catch (error) {
             console.log(error);
             Alert.alert('Erro ao cadastrar o autor!')
@@ -48,12 +51,12 @@ export default function FormAutor(props) {
                 </Body>
             </Header>
             <Content>
-                <Container style={styles.container}>
+                <View style={styles.container}>
                     <Item stackedLabel  style={{ marginBottom: 20 }}>
                         <Label>Autor</Label>
                         <Input value={nome} onChangeText={setNome} />
                     </Item>
-                    <Item>
+                    <Item picker>
                         <PickerCustom
                             list={sexos}
                             placeholder="Selecione o sexo..."
@@ -61,7 +64,7 @@ export default function FormAutor(props) {
                             onValueChange={setSexo} />
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
-                </Container>
+                </View>
             </Content>
             <Footer>
                 <FooterTab>

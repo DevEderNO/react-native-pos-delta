@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Alert } from 'react-native'
 import {
     Container, Header, Title, Content, Button, Left,
     Body, Icon, Text, Card, CardItem, View, Footer, FooterTab,
@@ -8,11 +9,21 @@ import api from '../services/api';
 
 export default function ListAutor(props) {
     const [autores, setAutores] = useState([]);
-    async function carregarGeneros() {
-        const response = await api.get('/autores');
-        setAutores(response.data);
+
+    async function carregarAutores() {
+        try {
+            const response = await api.get('/autores');
+            setAutores(response.data);
+        } catch (error) {
+            Alert.alert('Erro ao carregar a lista de autores');
+        }
     }
-    carregarGeneros();
+
+    useEffect(() => {
+        carregarAutores()
+    }, [autores])
+
+
     return (
         <Container>
             <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
@@ -31,23 +42,23 @@ export default function ListAutor(props) {
                     <FlatList data={autores}
                         keyExtractor={autor => `${autor.id}`}
                         renderItem={({ item }) => (
-                            <Content>
-                                <Card>
-                                    <CardItem>
-                                        <Body>
+                            <Container style={{ height: 'auto' }}>
+                                <Content>
+                                    <Card>
+                                        <CardItem header bordered>
                                             <Text >{item.nome}</Text>
-                                        </Body>
-                                    </CardItem>
-                                    <CardItem footer>
-                                        <Button danger onPress={async () => {
-                                            const id = item.id;
-                                            await api.delete(`/autors/${id}`);
-                                        }} >
-                                            <Text>Excluir</Text>
-                                        </Button>
-                                    </CardItem>
-                                </Card>
-                            </Content>
+                                        </CardItem>
+                                        <CardItem footer>
+                                            <Button danger onPress={async () => {
+                                                const id = item.id;
+                                                await api.delete(`/autores/${id}`);
+                                            }} >
+                                                <Text>Excluir</Text>
+                                            </Button>
+                                        </CardItem>
+                                    </Card>
+                                </Content>
+                            </Container>
                         )} />
                 </View>
             </Content>
