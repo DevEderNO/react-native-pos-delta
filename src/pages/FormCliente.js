@@ -28,7 +28,7 @@ export default function FormCliente(props) {
 
     useEffect(() => {
         carregarEnderecos();
-    }, [enderecos])
+    }, [])
 
     async function handleSubmit() {
         try {
@@ -91,19 +91,12 @@ export default function FormCliente(props) {
                                 list={enderecos}
                                 placeHolder="Selecione o endereco..."
                                 selectedValue={idEndereco}
-                                onValueChange={setIdEndereco} />
+                                onValueChange={(value) => setIdEndereco(value)} />
                         </Item>
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
         </Container >
     );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon } from 'native-base';
+import { StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
@@ -15,6 +16,8 @@ import ListAutor from './pages/ListAutor';
 import ListEditora from './pages/ListEditora'
 import ListCliente from './pages/ListCliente'
 import ListEndereco from './pages/ListEndereco'
+import FormEmprestimo from './pages/FormEmprestimo';
+import ListEmprestimo from './pages/ListEmprestimo';
 
 const Routes = createAppContainer(
     createDrawerNavigator({
@@ -23,7 +26,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Cadastro de Genero',
                 drawerIcon: () =>(
-                    <Icon name="transgender"></Icon>
+                    <Icon name="grunt" style={styles.icon}></Icon>
                 )
             }
         },
@@ -32,7 +35,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Lista de Genero',
                 drawerIcon: () =>(
-                    <Icon name="list"></Icon>
+                    <Icon name="list-ul" style={styles.icon}></Icon>
                 )
             }
             
@@ -42,7 +45,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Cadastro de Livro',
                 drawerIcon: () =>(
-                    <Icon name="book"></Icon>
+                    <Icon name="book" style={styles.icon}></Icon>
                 )
             }
         },
@@ -51,7 +54,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Lista de Livros',
                 drawerIcon: () =>(
-                    <Icon name="list"></Icon>
+                    <Icon name="list-ul" style={styles.icon}></Icon>
                 )
             }
         },
@@ -60,7 +63,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Cadastro de Autor',
                 drawerIcon: () =>(
-                    <Icon name="person"></Icon>
+                    <Icon name="user-tie" style={styles.icon}></Icon>
                 )
             }
         },
@@ -69,7 +72,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Lista de Autor',
                 drawerIcon: () =>(
-                    <Icon name="list"></Icon>
+                    <Icon name="list-ul" style={styles.icon}></Icon>
                 )
             }
         },
@@ -78,7 +81,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Cadastro de Editora',
                 drawerIcon: () =>(
-                    <Icon name="home"></Icon>
+                    <Icon name="leanpub" style={styles.icon}></Icon>
                 )
             }
         },
@@ -87,7 +90,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Lista de Editora',
                 drawerIcon: () =>(
-                    <Icon name="list"></Icon>
+                    <Icon name="list-ul" style={styles.icon}></Icon>
                 )
             }
         },
@@ -96,7 +99,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Cadastro de Cliente',
                 drawerIcon: () =>(
-                    <Icon name="person"></Icon>
+                    <Icon name="user" style={styles.icon}></Icon>
                 )
             }
         },
@@ -105,7 +108,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Lista de Cliente',
                 drawerIcon: () =>(
-                    <Icon name="list"></Icon>
+                    <Icon name="list-ul" style={styles.icon}></Icon>
                 )
             }
         },
@@ -114,7 +117,7 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Cadastro de Endereço',
                 drawerIcon: () =>(
-                    <Icon name="map"></Icon>
+                    <Icon name="map" style={styles.icon}></Icon>
                 )
             }
         },
@@ -123,7 +126,25 @@ const Routes = createAppContainer(
             navigationOptions:{
                 drawerLabel: 'Lista de Endereço',
                 drawerIcon: () =>(
-                    <Icon name="list"></Icon>
+                    <Icon name="list-ul" style={styles.icon}></Icon>
+                )
+            }
+        },
+        FormEmprestimo: {
+            screen: FormEmprestimo,
+            navigationOptions:{
+                drawerLabel: 'Emprestimo',
+                drawerIcon: () =>(
+                    <Icon name="clock" style={styles.icon}></Icon>
+                )
+            }
+        },
+        ListEmprestimo: {
+            screen: ListEmprestimo,
+            navigationOptions:{
+                drawerLabel: 'Lista de Emprestimo',
+                drawerIcon: () =>(
+                    <Icon name="list-ul" style={styles.icon}></Icon>
                 )
             }
         },
@@ -131,3 +152,10 @@ const Routes = createAppContainer(
 );
 
 export default Routes;
+
+const styles = StyleSheet.create({
+    icon:{
+        fontSize:20
+    },
+    iconGenero:{color:'brown'}
+})

@@ -5,6 +5,8 @@ import {
     Body, Icon, Text, Card, CardItem, View, Footer, FooterTab,
 } from 'native-base';
 import { FlatList } from 'react-native-gesture-handler';
+import ActionButtonCustom from '../components/ActionButtonCustom';
+
 import api from '../services/api';
 
 export default function ListAutor(props) {
@@ -21,7 +23,7 @@ export default function ListAutor(props) {
 
     useEffect(() => {
         carregarAutores()
-    }, [autores])
+    }, [])
 
 
     return (
@@ -50,8 +52,19 @@ export default function ListAutor(props) {
                                         </CardItem>
                                         <CardItem footer>
                                             <Button danger onPress={async () => {
-                                                const id = item.id;
-                                                await api.delete(`/autores/${id}`);
+                                                Alert.alert(
+                                                    'Excluir',
+                                                    'Confimar a exclusão ?',
+                                                    [
+                                                        { text: 'Não', style: 'cancel' },
+                                                        {
+                                                            text: 'Sim', onPress: async () => {
+                                                                const id = item.id;
+                                                                await api.delete(`/autores/${id}`);
+                                                            }
+                                                        }
+                                                    ]
+                                                )
                                             }} >
                                                 <Text>Excluir</Text>
                                             </Button>
@@ -62,13 +75,7 @@ export default function ListAutor(props) {
                         )} />
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+            <ActionButtonCustom props={props} title='Novo' route='FormAutor'/>
         </Container>
     );
 }

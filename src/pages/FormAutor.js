@@ -13,7 +13,6 @@ export default function FormAutor(props) {
     const [nome, setNome] = useState('');
     const [sexo, setSexo] = useState(-1);
     const sexos = [
-        { id: -1, nome: 'Selecione o sexo...' },
         { id: 0, nome: 'Masculino' },
         { id: 1, nome: 'Feminino' },
     ]
@@ -56,23 +55,19 @@ export default function FormAutor(props) {
                         <Label>Autor</Label>
                         <Input value={nome} onChangeText={setNome} />
                     </Item>
-                    <Item picker>
-                        <PickerCustom
-                            list={sexos}
-                            placeholder="Selecione o sexo..."
-                            selectedValue={sexo}
-                            onValueChange={setSexo} />
+                    <Item stackedLabel style={{marginBottom:10}}>
+                        <Label>Sexo</Label>
+                        <Item picker>
+                            <PickerCustom
+                                list={sexos}
+                                placeholder="Selecione o sexo..."
+                                selectedValue={sexo}
+                                onValueChange={(sexo)=>setSexo(sexo)} />
+                        </Item>
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
         </Container >
     );
 }

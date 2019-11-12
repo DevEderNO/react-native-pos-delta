@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import {Alert} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Alert } from 'react-native'
 import {
     Container, Header, Title, Content, Button, Left,
     Body, Icon, Text, Card, CardItem, View, Footer, FooterTab,
 } from 'native-base';
+import ActionButtonCustom from '../components/ActionButtonCustom';
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
 
@@ -13,7 +14,10 @@ export default function ListLivro(props) {
         const response = await api.get('/livros');
         setLivros(response.data);
     }
-    carregarGeneros();
+    useEffect(() => {
+        carregarGeneros()
+    }, []);
+
     return (
         <Container>
             <View style={{ backgroundColor: '#1A237E', height: 23 }}></View>
@@ -35,7 +39,7 @@ export default function ListLivro(props) {
                             <Content>
                                 <Card>
                                     <CardItem header bordered>
-                                            <Text >{item.nome}</Text>
+                                        <Text >{item.nome}</Text>
                                     </CardItem>
                                     <CardItem>
                                         <Body>
@@ -48,8 +52,19 @@ export default function ListLivro(props) {
                                     </CardItem>
                                     <CardItem footer>
                                         <Button danger onPress={async () => {
-                                            const id = item.id;
-                                            await api.delete(`/livros/${id}`);
+                                            Alert.alert(
+                                                'Excluir',
+                                                'Confimar a exclusão ?',
+                                                [
+                                                    { text: 'Não', style: 'cancel' },
+                                                    {
+                                                        text: 'Sim', onPress: async () => {
+                                                            const id = item.id;
+                                                            await api.delete(`/livros/${id}`);
+                                                        }
+                                                    }
+                                                ]
+                                            )
                                         }} >
                                             <Text>Excluir</Text>
                                         </Button>
@@ -59,13 +74,7 @@ export default function ListLivro(props) {
                         )} />
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+            <ActionButtonCustom props={props} title='Novo' route='FormLivro'/>
         </Container>
     );
 }

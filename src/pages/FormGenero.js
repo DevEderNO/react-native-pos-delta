@@ -30,7 +30,7 @@ export default function FormGenero(props) {
             <Header>
                 <Left>
                     <Button transparent>
-                        <Icon name='menu' onPress={() =>props.navigation.openDrawer()} />
+                        <Icon name='menu' onPress={() => props.navigation.openDrawer()} />
                     </Button>
                 </Left>
                 <Body>
@@ -39,20 +39,13 @@ export default function FormGenero(props) {
             </Header>
             <Content>
                 <View style={styles.container}>
-                    <Item stackedLabel  style={{ marginBottom: 10 }}>
+                    <Item stackedLabel style={{ marginBottom: 10 }}>
                         <Label>Genero</Label>
                         <Input value={descricao} onChangeText={setDescricao} />
                     </Item>
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
         </Container>
     );
 }

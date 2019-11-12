@@ -46,13 +46,6 @@ export default function FormEditora(props) {
           <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
         </View>
       </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>Footer</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
     </Container>
   );
 }

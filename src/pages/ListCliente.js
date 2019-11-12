@@ -4,6 +4,7 @@ import {
   Container, Header, Title, Content, Button, Left,
   Body, Icon, Text, Card, CardItem, View, Footer, FooterTab
 } from 'native-base';
+import ActionButtonCustom from '../components/ActionButtonCustom';
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
 
@@ -15,7 +16,7 @@ export default function ListCliente(props) {
   }
 
   useEffect(() => {
-    carregarClientes();
+    carregarClientes()
   }, [])
   return (
     <Container>
@@ -38,7 +39,7 @@ export default function ListCliente(props) {
               <Content>
                 <Card>
                   <CardItem header bordered>
-                      <Text >{item.nome}</Text>
+                    <Text >{item.nome}</Text>
                   </CardItem>
                   <CardItem>
                     <Body>
@@ -49,8 +50,19 @@ export default function ListCliente(props) {
                   </CardItem>
                   <CardItem footer>
                     <Button danger onPress={async () => {
-                      const id = item.id;
-                      await api.delete(`/clientes/${id}`);
+                      Alert.alert(
+                        'Excluir',
+                        'Confimar a exclusão ?',
+                        [
+                          { text: 'Não', style: 'cancel' },
+                          {
+                            text: 'Sim', onPress: async () => {
+                              const id = item.id;
+                              await api.delete(`/clientes/${id}`);
+                            }
+                          }
+                        ]
+                      )
                     }} >
                       <Text>Excluir</Text>
                     </Button>
@@ -60,13 +72,7 @@ export default function ListCliente(props) {
             )} />
         </KeyboardAvoidingView >
       </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>Footer</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
+      <ActionButtonCustom props={props} title='Novo' route='FormCliente'/>
     </Container>
   );
 }

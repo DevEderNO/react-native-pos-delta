@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Alert } from 'react-native';
 import {
     Container, Header, Title, Content, Button, Left,
-    Body, Icon, Text, Card, CardItem, View, Footer, FooterTab
+    Body, Icon, Text, Card, CardItem, View
 } from 'native-base';
 import { FlatList } from 'react-native-gesture-handler';
+import ActionButtonCustom from '../components/ActionButtonCustom';
 import api from '../services/api';
 
 export default function ListGenero(props) {
@@ -21,7 +22,7 @@ export default function ListGenero(props) {
 
     useEffect(() => {
         carregarGeneros()
-    }, [generos])
+    }, [])
 
     return (
         <Container>
@@ -49,8 +50,20 @@ export default function ListGenero(props) {
                                         </CardItem>
                                         <CardItem footer>
                                             <Button danger onPress={async () => {
-                                                const id = item.id;
-                                                await api.delete(`/generos/${id}`);
+                                                Alert.alert(
+                                                    'Excluir',
+                                                    'Confimar a exclusão ?',
+                                                    [
+                                                        { text: 'Não', style: 'cancel' },
+                                                        {
+                                                            text: 'Sim', onPress: async () => {
+                                                                const id = item.id;
+                                                                await api.delete(`/generos/${id}`);
+                                                            }
+                                                        }
+                                                    ]
+                                                )
+
                                             }} >
                                                 <Text>Excluir</Text>
                                             </Button>
@@ -61,13 +74,8 @@ export default function ListGenero(props) {
                         )} />
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+            <ActionButtonCustom props={props} title='Novo' route='FormGenero' />
         </Container>
     );
 }
+

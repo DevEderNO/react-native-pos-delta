@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Alert } from 'react-native'
 import {
-    Container, Header, Title, Content,
-    Footer, FooterTab, Button, Left,
+    Container, Header, Title, Content, Button, Left,
     Body, Icon, Text, Item, Label,
     Input, View, Form
 } from 'native-base';
@@ -14,14 +13,14 @@ import PickerCustom from '../components/PickerCustom'
 export default function FormLivro(props) {
     const [nome, setNome] = useState('');
     const [valor, setValor] = useState('');
-    const [generos, setGenero] = useState([]);
-    const [autores, setAutores] = useState([]);
-    const [editoras, setEditoras] = useState([]);
+    const [volume, setVolume] = useState('');
     const [idGenero, setIdGenero] = useState(-1);
     const [idAutor, setIdAutor] = useState(-1);
     const [idEditora, setIdEditora] = useState(-1);
-    const [volume, setVolume] = useState('');
     const [dataPublicacao, setDataPublicacao] = useState(moment(Date.now()));
+    const [generos, setGenero] = useState([]);
+    const [autores, setAutores] = useState([]);
+    const [editoras, setEditoras] = useState([]);
 
     async function carregarGeneros() {
         try {
@@ -51,13 +50,9 @@ export default function FormLivro(props) {
 
     useEffect(() => {
         carregarGeneros()
-    }, [generos]);
-    useEffect(() => {
         carregarAutores()
-    }, [autores]);
-    useEffect(() => {
         carregarEditora()
-    }, [editoras]);
+    }, []);
 
     async function handleSubmit() {
         try {
@@ -68,7 +63,7 @@ export default function FormLivro(props) {
                     valor,
                     genero: { id: idGenero },
                     autor: { id: idAutor },
-                    editora:{id:idEditora},
+                    editora: { id: idEditora },
                     volume,
                     dataPublicacao: moment(dataPublicacao, 'DD/MM/YYYY').format('YYYY-MM-DD')
                 })
@@ -80,7 +75,7 @@ export default function FormLivro(props) {
             setIdGenero(-1);
             setIdAutor(-1);
             setIdEditora(-1);
-            setDataPublicacao(new Date())
+            setDataPublicacao(moment(Date.now()))
         } catch (error) {
             console.log(error);
             Alert.alert('Erro ao realizar a operação!');
@@ -108,50 +103,49 @@ export default function FormLivro(props) {
                         </Item>
                         <Item stackedLabel >
                             <Label>Valor do livro</Label>
-                            <Input onChangeText={setValor} keyboardType={'numeric'} />
+                            <Input value={valor} onChangeText={setValor} keyboardType={'numeric'} />
                         </Item>
                         <Item stackedLabel >
                             <Label>Volume do livro</Label>
                             <Input value={volume} onChangeText={setVolume} keyboardType={'numeric'} />
                         </Item>
                         <Item stackedLabel >
-                            <Label>Genero</Label>   
+                            <Label>Genero</Label>
                             <Item picker>
                                 <PickerCustom
                                     list={generos}
                                     placeholder="Selecione o genero..."
                                     selectedValue={idGenero}
-                                    onValueChange={setIdGenero} />
+                                    onValueChange={(id) => setIdGenero(id)} />
                             </Item>
                         </Item>
                         <Item stackedLabel>
-                            <Label>Autor</Label>  
+                            <Label>Autor</Label>
                             <Item picker>
                                 <PickerCustom
                                     list={autores}
                                     placeholder="Selecione o autor..."
                                     selectedValue={idAutor}
-                                    onValueChange={setIdAutor} />
+                                    onValueChange={(id) => setIdAutor(id)} />
                             </Item>
                         </Item>
                         <Item stackedLabel>
-                            <Label>Editora</Label>  
+                            <Label>Editora</Label>
                             <Item picker>
                                 <PickerCustom
                                     list={editoras}
-                                    placeholder="Selecione o autor..."
+                                    placeholder="Selecione a editora..."
                                     selectedValue={idEditora}
-                                    onValueChange={setIdEditora} />
+                                    onValueChange={(id) => setIdEditora(id)} />
                             </Item>
                         </Item>
                         <Item stackedLabel last>
-                            <Label>Data de publicação</Label> 
+                            <Label>Data de publicação</Label>
                             <Item picker>
                                 <DatePickerCustom
                                     placeHolderText="Selecione a data..."
-                                    label='Data de publicação'
                                     date={dataPublicacao}
-                                    onDateChange={setDataPublicacao}
+                                    onDateChange={(dataPublicacao) => setDataPublicacao(dataPublicacao)}
                                 />
                             </Item>
                         </Item>
@@ -160,13 +154,6 @@ export default function FormLivro(props) {
                     <Button block onPress={handleSubmit} ><Text> Cadastrar </Text></Button>
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
         </Container>
     );
 }

@@ -6,6 +6,7 @@ import {
 } from 'native-base';
 import { FlatList } from 'react-native-gesture-handler';
 import api from '../services/api';
+import ActionButtonCustom from '../components/ActionButtonCustom';
 
 export default function ListEndereco(props) {
     const [enderecos, setEnderecoes] = useState([]);
@@ -19,8 +20,8 @@ export default function ListEndereco(props) {
     }
 
     useEffect(()=>{
-        carregarEnderecos();
-    },[enderecos])
+        carregarEnderecos()
+    },[])
 
     return (
         <Container>
@@ -56,8 +57,19 @@ export default function ListEndereco(props) {
                                     </CardItem>
                                     <CardItem footer>
                                         <Button danger onPress={async () => {
-                                            const id = item.id;
-                                            await api.delete(`/enderecos/${id}`);
+                                            Alert.alert(
+                                                'Excluir',
+                                                'Confimar a exclusão ?',
+                                                [
+                                                    { text: 'Não', style: 'cancel' },
+                                                    {
+                                                        text: 'Sim', onPress: async () => {
+                                                            const id = item.id;
+                                                            await api.delete(`/enderecos/${id}`);
+                                                        }
+                                                    }
+                                                ]
+                                            )
                                         }} >
                                             <Text>Excluir</Text>
                                         </Button>
@@ -67,13 +79,7 @@ export default function ListEndereco(props) {
                         )} />
                 </View>
             </Content>
-            <Footer>
-                <FooterTab>
-                    <Button full>
-                        <Text>Footer</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+            <ActionButtonCustom props={props} title='Novo' route='FormEndereco'/>
         </Container>
     );
 }

@@ -7,16 +7,15 @@ export default function PickerCustom(props) {
             <Picker
                 mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />}
-                placeholder={props.placeholder}
-                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderStyle={{ color: "#0026ca" }}
                 placeholderIconColor="#007aff"
                 selectedValue={props.selectedValue}
                 onValueChange={props.onValueChange}
             >
                 <Picker.Item key={-1}
-                    label={'Selecione...'}
+                    label={props.placeholder}
                     value={-1}
-                    color="#bfc6ea"
+                    color="#d3d3d3"
                      />
                 {
                     props.list.map((item) => {

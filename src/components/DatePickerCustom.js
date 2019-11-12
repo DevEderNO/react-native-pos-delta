@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Content, Text, DatePicker, Container
+    Content, DatePicker
 } from 'native-base';
 
 export default function DatePickerCustom(props) {
@@ -17,7 +17,7 @@ export default function DatePickerCustom(props) {
                 animationType={"fade"}
                 androidMode={"default"}
                 placeHolderText={props.placeHolderText}
-                textStyle={{ color: "green" }}
+                textStyle={{ color: "#0026ca" }}
                 placeHolderTextStyle={{ color: "#d3d3d3" }}
                 onDateChange={props.onDateChange}
                 disabled={false}
