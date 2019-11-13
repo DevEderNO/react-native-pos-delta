@@ -23,7 +23,7 @@ export default function ListEmprestimo(props) {
 
   useEffect(() => {
     carregarEmprestimos()
-  }, [])
+  }, [idEmprestimo])
 
   return (
     <Container>

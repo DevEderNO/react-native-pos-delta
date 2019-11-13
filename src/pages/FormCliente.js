@@ -74,15 +74,15 @@ export default function FormCliente(props) {
                     </Item>
                     <Item stackedLabel>
                         <Label>CPF</Label>
-                        <Input value={cpf} onChangeText={setCpf} />
+                        <Input value={cpf} onChangeText={setCpf} keyboardType={'decimal-pad'}/>
                     </Item>
                     <Item stackedLabel>
                         <Label>E-mail</Label>
-                        <Input value={email} onChangeText={setEmail} />
+                        <Input value={email} onChangeText={setEmail} keyboardType={'email-address'}/>
                     </Item>
                     <Item stackedLabel>
                         <Label>Telefone</Label>
-                        <Input value={telefone} onChangeText={setTelefone} />
+                        <Input value={telefone} onChangeText={setTelefone} keyboardType={'numeric'}/>
                     </Item>
                     <Item stackedLabel style={{marginBottom:10}}>
                         <Label>Endereço</Label>
