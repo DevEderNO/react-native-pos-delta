@@ -11,19 +11,25 @@ import moment from 'moment';
 
 export default function ListEmprestimo(props) {
   const [emprestimos, setEmprestimos] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   async function carregarEmprestimos() {
     try {
       const response = await api.get('/emprestimos');
       setEmprestimos(response.data);
+      setLoading(false)
     } catch (error) {
       Alert.alert('Erro ao carregar a lista de emprestimos');
     }
   }
 
   useEffect(() => {
-    carregarEmprestimos()
-  }, [idEmprestimo])
+    if(loading){
+      carregarEmprestimos()
+      setTimeout(() => {
+        setLoading(true)
+      }, 1000);
+    }
+  }, [loading])
 
   return (
     <Container>

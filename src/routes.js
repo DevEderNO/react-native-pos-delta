@@ -112,7 +112,7 @@ const Routes = createAppContainer(
                 )
             }
         },
-        CadastroEndereco: {
+        FormEndereco: {
             screen: FormEndereco,
             navigationOptions:{
                 drawerLabel: 'Cadastro de Endereço',
